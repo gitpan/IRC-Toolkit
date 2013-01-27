@@ -19,7 +19,7 @@ provides:
     version: 0
   IRC::Toolkit:
     file: lib/IRC/Toolkit.pm
-    version: 0.01
+    version: 0.02
   IRC::Toolkit::CTCP:
     file: lib/IRC/Toolkit/CTCP.pm
     version: 0
@@ -48,5 +48,5 @@ requires:
   strictures: 1
 resources:
   license: http://dev.perl.org/licenses/
-  repository: http://github.com/avenj/poe-filter-ircv3.git
-version: 0.01
+  repository: http://github.com/avenj/irc-toolkit.git
+version: 0.02

@@ -35,7 +35,7 @@ Module::Build->subclass(
 
   meta_merge => {
     resources => {
-      repository => 'http://github.com/avenj/poe-filter-ircv3.git',
+      repository => 'http://github.com/avenj/irc-toolkit.git',
     },
   },
 )->create_build_script;

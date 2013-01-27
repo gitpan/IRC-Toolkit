@@ -208,8 +208,9 @@ accessors with automatic parsing magic.
 
 =head3 ircmsg
 
-Create a new IRC::Message::Object -- shortcut for C<<
-IRC::Message::Object->new >>
+Create a new B<IRC::Message::Object>
+
+Shortcut for C<< IRC::Message::Object->new >>
 
 =head2 Methods
 
@@ -217,17 +218,26 @@ IRC::Message::Object->new >>
 
 The parsed command received. (No case-folding takes place.)
 
+predicate: C<has_command>
+
 =head3 params
 
 ARRAY of parameters.
 
+predicate: C<has_command>
+
 =head3 prefix
 
-The server prefix.
+The origin prefix.
+
+predicate: C<has_prefix>
 
 =head3 raw_line
 
-The raw IRC line.
+The raw IRC line. This will be generated via L<POE::Filter::IRCv3> if we
+weren't constructed with one.
+
+predicate: C<has_raw_line>
 
 =head3 get_tag
 

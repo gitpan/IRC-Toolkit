@@ -14,6 +14,7 @@ is_deeply(
     [ '+', 'l', 10 ],
     [ '-', 't' ],
   ],
+  'mode_to_array chan modes ok'
 );
 my $array = mode_to_array( '+o-o+vb avenj avenj Joah things@stuff' );
 is_deeply( $array,
@@ -23,6 +24,7 @@ is_deeply( $array,
     [ '+', 'v', 'Joah'  ],
     [ '+', 'b', 'things@stuff' ],
   ],
+  'mode_to_array status modes ok'
 ) or diag explain $array;
 
 
@@ -46,6 +48,7 @@ is_deeply( $mhash,
       'k' => [ 'thiskey' ],
     },
   },
+  'mode_to_hash looks ok'
 );
 
 ok( $mhash = mode_to_hash(  '+h',
@@ -61,6 +64,7 @@ is_deeply( $mhash,
     },
     del => { },
   },
+  'mode_to_hash (param_always) looks ok'
 );
 
 done_testing;

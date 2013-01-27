@@ -1,4 +1,8 @@
 # Changes for IRC::Toolkit
 
+  - 0.02    (27 Jan 2013)
+    POD/test tweaks
+    Fix repo metadata
+
   - 0.01    (27 Jan 2013)
     Initial release
