@@ -1,4 +1,7 @@
 package IRC::Toolkit::Modes;
+{
+  $IRC::Toolkit::Modes::VERSION = '0.03';
+}
 
 use Carp;
 use strictures 1;
@@ -8,6 +11,13 @@ our @EXPORT = qw/
   mode_to_array
   mode_to_hash
 /;
+
+
+=pod
+
+=for Pod::Coverage mode_array_to_str mode_hash_to_str
+
+=cut
 
 sub mode_array_to_str {
   my ($self, $array, $maxmodes) = @_;

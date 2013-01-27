@@ -24,6 +24,11 @@ DESCRIPTION
 
     IRC::Toolkit::Parser; Functional interface to POE::Filter::IRCv3
 
+SEE ALSO
+    IRC::Utils
+
+    Parse::IRC
+
 AUTHOR
     Jon Portnoy <avenj@cobaltirc.org>
 

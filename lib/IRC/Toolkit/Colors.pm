@@ -1,4 +1,7 @@
 package IRC::Toolkit::Colors;
+{
+  $IRC::Toolkit::Colors::VERSION = '0.03';
+}
 
 use Carp;
 use strictures 1;
@@ -30,6 +33,7 @@ our %COLORS = (
 
   LIGHT_BLUE  => "\x0312",
   LIGHT_CYAN  => "\x0311",
+  CYAN        => "\x0311",
   LIGHT_GREEN => "\x0309",
   LIGHT_GRAY  => "\x0315",
   LIGHT_GREY  => "\x0315",
@@ -85,7 +89,7 @@ Valid color codes are:
   black
   blue
   light_blue
-  light_cyan
+  cyan
   green
   light_green
   red

@@ -1,5 +1,7 @@
 package IRC::Toolkit;
-our $VERSION = '0.02';
+{
+  $IRC::Toolkit::VERSION = '0.03';
+}
 
 use Carp;
 use strictures 1;
@@ -61,6 +63,12 @@ L<IRC::Toolkit::Masks>; Hostmask parsing and matching tools
 L<IRC::Toolkit::Modes>; Mode-line parsing tools
 
 L<IRC::Toolkit::Parser>; Functional interface to L<POE::Filter::IRCv3>
+
+=head1 SEE ALSO
+
+L<IRC::Utils>
+
+L<Parse::IRC>
 
 =head1 AUTHOR
 

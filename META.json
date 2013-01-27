@@ -1,10 +1,10 @@
 {
-   "abstract" : "Extended collection of IRC utility functions",
+   "abstract" : "Collected IRC utilities",
    "author" : [
       "Jon Portnoy <avenj@cobaltirc.org>"
    ],
-   "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.120921",
+   "dynamic_config" : 0,
+   "generated_by" : "Dist::Zilla version 4.300029, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -14,14 +14,16 @@
    },
    "name" : "IRC-Toolkit",
    "prereqs" : {
-      "build" : {
-         "requires" : {
-            "Test::More" : "0"
-         }
-      },
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.38"
+            "ExtUtils::MakeMaker" : "6.30"
+         }
+      },
+      "develop" : {
+         "requires" : {
+            "Pod::Coverage::TrustPod" : "0",
+            "Test::Pod" : "1.41",
+            "Test::Pod::Coverage" : "1.08"
          }
       },
       "runtime" : {
@@ -36,48 +38,14 @@
          }
       }
    },
-   "provides" : {
-      "IRC::Message::Object" : {
-         "file" : "lib/IRC/Message/Object.pm",
-         "version" : 0
-      },
-      "IRC::Toolkit" : {
-         "file" : "lib/IRC/Toolkit.pm",
-         "version" : "0.02"
-      },
-      "IRC::Toolkit::CTCP" : {
-         "file" : "lib/IRC/Toolkit/CTCP.pm",
-         "version" : 0
-      },
-      "IRC::Toolkit::Case" : {
-         "file" : "lib/IRC/Toolkit/Case.pm",
-         "version" : 0
-      },
-      "IRC::Toolkit::Colors" : {
-         "file" : "lib/IRC/Toolkit/Colors.pm",
-         "version" : 0
-      },
-      "IRC::Toolkit::Masks" : {
-         "file" : "lib/IRC/Toolkit/Masks.pm",
-         "version" : 0
-      },
-      "IRC::Toolkit::Modes" : {
-         "file" : "lib/IRC/Toolkit/Modes.pm",
-         "version" : 0
-      },
-      "IRC::Toolkit::Parser" : {
-         "file" : "lib/IRC/Toolkit/Parser.pm",
-         "version" : 0
-      }
-   },
    "release_status" : "stable",
    "resources" : {
-      "license" : [
-         "http://dev.perl.org/licenses/"
-      ],
       "repository" : {
-         "url" : "http://github.com/avenj/irc-toolkit.git"
+         "type" : "git",
+         "url" : "git://github.com/avenj/irc-toolkit.git",
+         "web" : "https://github.com/avenj/irc-toolkit"
       }
    },
-   "version" : "0.02"
+   "version" : "0.03"
 }
+

@@ -1,0 +1,43 @@
+# NAME
+
+IRC::Toolkit - Collected IRC utilities
+
+# SYNOPSIS
+
+    ## Import all of the included Tookit:: modules:
+    use IRC::Toolkit;
+
+# DESCRIPTION
+
+A collection of useful IRC-related utilities. See their respective
+documentation, below.
+
+[IRC::Message::Object](http://search.cpan.org/perldoc?IRC::Message::Object); objects representing incoming or outgoing IRC events
+
+[IRC::Toolkit::Case](http://search.cpan.org/perldoc?IRC::Toolkit::Case); RFC-compliant case folding tools
+
+[IRC::Toolkit::Colors](http://search.cpan.org/perldoc?IRC::Toolkit::Colors); Color/format interpolation in strings
+
+[IRC::Toolkit::CTCP](http://search.cpan.org/perldoc?IRC::Toolkit::CTCP); CTCP quoting and extraction tools
+
+[IRC::Toolkit::Masks](http://search.cpan.org/perldoc?IRC::Toolkit::Masks); Hostmask parsing and matching tools
+
+[IRC::Toolkit::Modes](http://search.cpan.org/perldoc?IRC::Toolkit::Modes); Mode-line parsing tools
+
+[IRC::Toolkit::Parser](http://search.cpan.org/perldoc?IRC::Toolkit::Parser); Functional interface to [POE::Filter::IRCv3](http://search.cpan.org/perldoc?POE::Filter::IRCv3)
+
+# SEE ALSO
+
+[IRC::Utils](http://search.cpan.org/perldoc?IRC::Utils)
+
+[Parse::IRC](http://search.cpan.org/perldoc?Parse::IRC)
+
+# AUTHOR
+
+Jon Portnoy <avenj@cobaltirc.org>
+
+Portions of code are derived from [IRC::Utils](http://search.cpan.org/perldoc?IRC::Utils), [Net::IRC](http://search.cpan.org/perldoc?Net::IRC), and
+[POE::Filter::IRC::Compat](http://search.cpan.org/perldoc?POE::Filter::IRC::Compat), which are copyright their respective authors;
+these items are documented where they are found, as well.
+
+Licensed under the same terms as Perl.

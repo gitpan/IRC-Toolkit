@@ -1,8 +1,13 @@
 # Changes for IRC::Toolkit
 
-  - 0.02    (27 Jan 2013)
-    POD/test tweaks
-    Fix repo metadata
+0.03    (27 Jan 2013)
+  POD tweaks
+  Move dist to dzil
+  Update copyright notices
 
-  - 0.01    (27 Jan 2013)
-    Initial release
+0.02    (27 Jan 2013)
+  POD/test tweaks
+  Fix repo metadata
+
+0.01    (27 Jan 2013)
+  Initial release

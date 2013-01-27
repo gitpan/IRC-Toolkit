@@ -1,4 +1,7 @@
 package IRC::Toolkit::Case;
+{
+  $IRC::Toolkit::Case::VERSION = '0.03';
+}
 
 use strictures 1;
 
@@ -113,6 +116,6 @@ Returns boolean true if the strings are equal
 
 Jon Portnoy <avenj@cobaltirc.org>
 
-Inspired by L<IRC::Utils>, copyright Chris Williams
+Inspired by L<IRC::Utils>, copyright Chris Williams, Hinrik et al
 
 =cut

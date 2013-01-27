@@ -1,4 +1,7 @@
 package IRC::Toolkit::Masks;
+{
+  $IRC::Toolkit::Masks::VERSION = '0.03';
+}
 
 use Carp;
 use strictures 1;
@@ -120,7 +123,7 @@ Returns just the nickname in scalar context.
 =head1 AUTHOR
 
 Mask-matching and normalization code derived from L<IRC::Utils>, 
-copyright Chris Williams
+copyright Chris Williams, HINRIK et al.
 
 Jon Portnoy L<avenj@cobaltirc.org>
 

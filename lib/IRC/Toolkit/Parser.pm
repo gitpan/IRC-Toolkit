@@ -1,4 +1,7 @@
 package IRC::Toolkit::Parser;
+{
+  $IRC::Toolkit::Parser::VERSION = '0.03';
+}
 
 use Carp;
 use strictures 1;
@@ -51,6 +54,15 @@ See L<POE::Filter::IRCv3> for details.
 
 Also see L<IRC::Message::Object> for a handy object-oriented interface to IRC
 event transformation.
+
+=head2 irc_ref_from_line
+
+Takes a raw IRC line and returns a HASH as described in the documentation for 
+L<POE::Filter::IRCv3>.
+
+=head2 irc_line_from_ref
+
+Takes a HASH as described in L<POE::Filter::IRCv3> and returns a raw IRC line.
 
 =head1 AUTHOR
 
