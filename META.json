@@ -1,0 +1,83 @@
+{
+   "abstract" : "Extended collection of IRC utility functions",
+   "author" : [
+      "Jon Portnoy <avenj@cobaltirc.org>"
+   ],
+   "dynamic_config" : 1,
+   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.120921",
+   "license" : [
+      "perl_5"
+   ],
+   "meta-spec" : {
+      "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
+      "version" : "2"
+   },
+   "name" : "IRC-Toolkit",
+   "prereqs" : {
+      "build" : {
+         "requires" : {
+            "Test::More" : "0"
+         }
+      },
+      "configure" : {
+         "requires" : {
+            "Module::Build" : "0.38"
+         }
+      },
+      "runtime" : {
+         "requires" : {
+            "Carp" : "0",
+            "Exporter" : "0",
+            "Moo" : "1",
+            "POE::Filter::IRCv3" : "0",
+            "Scalar::Util" : "0",
+            "perl" : "v5.10.1",
+            "strictures" : "1"
+         }
+      }
+   },
+   "provides" : {
+      "IRC::Message::Object" : {
+         "file" : "lib/IRC/Message/Object.pm",
+         "version" : 0
+      },
+      "IRC::Toolkit" : {
+         "file" : "lib/IRC/Toolkit.pm",
+         "version" : "0.01"
+      },
+      "IRC::Toolkit::CTCP" : {
+         "file" : "lib/IRC/Toolkit/CTCP.pm",
+         "version" : 0
+      },
+      "IRC::Toolkit::Case" : {
+         "file" : "lib/IRC/Toolkit/Case.pm",
+         "version" : 0
+      },
+      "IRC::Toolkit::Colors" : {
+         "file" : "lib/IRC/Toolkit/Colors.pm",
+         "version" : 0
+      },
+      "IRC::Toolkit::Masks" : {
+         "file" : "lib/IRC/Toolkit/Masks.pm",
+         "version" : 0
+      },
+      "IRC::Toolkit::Modes" : {
+         "file" : "lib/IRC/Toolkit/Modes.pm",
+         "version" : 0
+      },
+      "IRC::Toolkit::Parser" : {
+         "file" : "lib/IRC/Toolkit/Parser.pm",
+         "version" : 0
+      }
+   },
+   "release_status" : "stable",
+   "resources" : {
+      "license" : [
+         "http://dev.perl.org/licenses/"
+      ],
+      "repository" : {
+         "url" : "http://github.com/avenj/poe-filter-ircv3.git"
+      }
+   },
+   "version" : "0.01"
+}

@@ -1,0 +1,35 @@
+NAME
+    IRC::Toolkit - Collected IRC utilities
+
+SYNOPSIS
+      ## Import all of the included Tookit:: modules:
+      use IRC::Toolkit;
+
+DESCRIPTION
+    A collection of useful IRC-related utilities. See their respective
+    documentation, below.
+
+    IRC::Message::Object; objects representing incoming or outgoing IRC
+    events
+
+    IRC::Toolkit::Case; RFC-compliant case folding tools
+
+    IRC::Toolkit::Colors; Color/format interpolation in strings
+
+    IRC::Toolkit::CTCP; CTCP quoting and extraction tools
+
+    IRC::Toolkit::Masks; Hostmask parsing and matching tools
+
+    IRC::Toolkit::Modes; Mode-line parsing tools
+
+    IRC::Toolkit::Parser; Functional interface to POE::Filter::IRCv3
+
+AUTHOR
+    Jon Portnoy <avenj@cobaltirc.org>
+
+    Portions of code are derived from IRC::Utils, Net::IRC, and
+    POE::Filter::IRC::Compat, which are copyright their respective authors;
+    these items are documented where they are found, as well.
+
+    Licensed under the same terms as Perl.
+
