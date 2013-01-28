@@ -1,6 +1,6 @@
 package IRC::Toolkit::Masks;
 {
-  $IRC::Toolkit::Masks::VERSION = '0.03';
+  $IRC::Toolkit::Masks::VERSION = '0.04';
 }
 
 use Carp;

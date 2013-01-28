@@ -1,6 +1,6 @@
 package IRC::Message::Object;
 {
-  $IRC::Message::Object::VERSION = '0.03';
+  $IRC::Message::Object::VERSION = '0.04';
 }
 
 use strictures 1;
@@ -35,14 +35,12 @@ has 'command' => (
   required  => 1,
   is        => 'ro',
   predicate => 'has_command',
-  writer    => '_set_command',
 );
 
 has 'prefix' => (
   is        => 'ro',
   lazy      => 1,
   predicate => 'has_prefix',
-  writer    => '_set_prefix',
   default   => sub { '' },
 );
 
@@ -54,7 +52,6 @@ has 'params' => (
     or confess "'params =>' not an ARRAY: $_[0]"
   },
   predicate => 'has_params',
-  writer    => '_set_params',
   default   => sub { [] },
 );
 
@@ -62,7 +59,6 @@ has 'raw_line' => (
   is        => 'ro',
   lazy      => 1,
   predicate => 'has_raw_line',
-  writer    => '_set_raw_line',
   default   => sub {
     my ($self) = @_;
     my %hash;
@@ -83,7 +79,6 @@ has 'tags' => (
     or confess "'tags =>' not a HASH: $_[0]"
   },
   predicate => 'has_tags',
-  writer    => '_set_tags',
   default   => sub {  {}  },
 );
 

@@ -1,5 +1,11 @@
 # Changes for IRC::Toolkit
 
+0.04    (28 Jan 2013)
+  IRC::Message::Object; 
+    Kill attrib writers (unneeded and bad practice)
+  IRC::Toolkit::Parser;
+    irc_line_from_ref also accepts IRC::Message::Object instances
+
 0.03    (27 Jan 2013)
   POD tweaks
   Move dist to dzil

@@ -1,6 +1,6 @@
 package IRC::Toolkit::Parser;
 {
-  $IRC::Toolkit::Parser::VERSION = '0.03';
+  $IRC::Toolkit::Parser::VERSION = '0.04';
 }
 
 use Carp;
@@ -11,6 +11,8 @@ our @EXPORT = qw/
   irc_ref_from_line
   irc_line_from_ref
 /;
+
+use Scalar::Util 'blessed', 'reftype';
 
 use POE::Filter::IRCv3;
 my $filter = 'POE::Filter::IRCv3';
@@ -25,7 +27,8 @@ sub irc_ref_from_line {
 sub irc_line_from_ref {
   my $ref = shift;
   confess "Expected a HASH and optional filter arguments"
-    unless ref $ref eq 'HASH';
+    unless reftype $ref eq 'HASH';
+  $ref = +{%$ref} if blessed $ref;
   $filter->new(@_)->put([$ref])->[0]
 }
 
