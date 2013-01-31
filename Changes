@@ -1,5 +1,9 @@
 # Changes for IRC::Toolkit
 
+0.05    (28 Jan 2013)
+  IRC::Toolkit::Modes;
+    Kill use of '...'
+
 0.04    (28 Jan 2013)
   IRC::Message::Object; 
     Kill attrib writers (unneeded and bad practice)

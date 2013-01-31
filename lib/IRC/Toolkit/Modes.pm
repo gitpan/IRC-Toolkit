@@ -1,6 +1,6 @@
 package IRC::Toolkit::Modes;
 {
-  $IRC::Toolkit::Modes::VERSION = '0.04';
+  $IRC::Toolkit::Modes::VERSION = '0.05';
 }
 
 use Carp;
@@ -22,13 +22,13 @@ our @EXPORT = qw/
 sub mode_array_to_str {
   my ($self, $array, $maxmodes) = @_;
   ## FIXME
-  ...
+  die "Unimplemented"
 }
 
 sub mode_hash_to_str {
   my ($self, $hash, $maxmodes) = @_;
   ## FIXME
-  ...
+  die "Unimplemented"
 }
 
 sub mode_to_array {
