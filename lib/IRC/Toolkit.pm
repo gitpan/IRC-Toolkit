@@ -1,6 +1,6 @@
 package IRC::Toolkit;
 {
-  $IRC::Toolkit::VERSION = '0.05';
+  $IRC::Toolkit::VERSION = '0.06';
 }
 
 use Carp;

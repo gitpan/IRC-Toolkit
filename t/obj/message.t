@@ -29,7 +29,9 @@ my $tag_line = q{@intent=ACTION;znc.in/extension=value;foobar}
 my $parsed = $filter->get([$tag_line])->[0];
 my $tagged = IRC::Message::Object->new(%$parsed);
 
-cmp_ok( $tagged->raw_line, 'eq', $tag_line, 'raw_line  ok' );
+cmp_ok( length($tagged->raw_line), '==', length($tag_line), 
+  'raw_line length ok' 
+);
 
 ok( $tagged->has_tags, 'has_tags  ok' );
 is_deeply( $tagged->tags,
