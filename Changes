@@ -1,5 +1,7 @@
 # Changes for IRC::Toolkit
 
+0.070002  (09 Feb 2013)
+  Documentation updates
 
 0.070001  (09 Feb 2013)
   Add IRC::Mode::Single, IRC::Mode::Set objects

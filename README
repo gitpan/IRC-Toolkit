@@ -12,6 +12,10 @@ DESCRIPTION
     IRC::Message::Object; objects representing incoming or outgoing IRC
     events
 
+    IRC::Mode::Single; objects representing a single mode change
+
+    IRC::Mode::Set; objects representing a set of mode changes
+
     IRC::Toolkit::Case; RFC-compliant case folding tools
 
     IRC::Toolkit::Colors; Color/format interpolation in strings

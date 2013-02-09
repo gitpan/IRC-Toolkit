@@ -14,6 +14,10 @@ documentation, below.
 
 [IRC::Message::Object](http://search.cpan.org/perldoc?IRC::Message::Object); objects representing incoming or outgoing IRC events
 
+[IRC::Mode::Single](http://search.cpan.org/perldoc?IRC::Mode::Single); objects representing a single mode change
+
+[IRC::Mode::Set](http://search.cpan.org/perldoc?IRC::Mode::Set); objects representing a set of mode changes
+
 [IRC::Toolkit::Case](http://search.cpan.org/perldoc?IRC::Toolkit::Case); RFC-compliant case folding tools
 
 [IRC::Toolkit::Colors](http://search.cpan.org/perldoc?IRC::Toolkit::Colors); Color/format interpolation in strings

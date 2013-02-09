@@ -1,6 +1,6 @@
 package IRC::Mode::Single;
 {
-  $IRC::Mode::Single::VERSION = '0.070001';
+  $IRC::Mode::Single::VERSION = '0.070002';
 }
 
 use 5.10.1;
