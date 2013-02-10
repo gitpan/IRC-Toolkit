@@ -1,6 +1,6 @@
 package IRC::Toolkit::CTCP;
 {
-  $IRC::Toolkit::CTCP::VERSION = '0.070002';
+  $IRC::Toolkit::CTCP::VERSION = '0.070003';
 }
 
 use strictures 1;

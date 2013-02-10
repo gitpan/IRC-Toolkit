@@ -1,6 +1,6 @@
 package IRC::Message::Object;
 {
-  $IRC::Message::Object::VERSION = '0.070002';
+  $IRC::Message::Object::VERSION = '0.070003';
 }
 
 use strictures 1;
@@ -28,6 +28,7 @@ sub truncate {
   ##  but *not* including message tags
   ##  (and trailing space after them)
   ##  per http://ircv3.atheme.org/specification/message-tags-3.2
+  ## try to preserve ctcp quoting if exists
   ## return new Event
 }
 

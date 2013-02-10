@@ -1,6 +1,6 @@
 package IRC::Toolkit;
 {
-  $IRC::Toolkit::VERSION = '0.070002';
+  $IRC::Toolkit::VERSION = '0.070003';
 }
 
 use Carp;
@@ -38,7 +38,7 @@ sub import {
 
 =head1 NAME
 
-IRC::Toolkit - Collected IRC utilities
+IRC::Toolkit - Useful IRC objects and utilities
 
 =head1 SYNOPSIS
 

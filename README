@@ -1,5 +1,5 @@
 NAME
-    IRC::Toolkit - Collected IRC utilities
+    IRC::Toolkit - Useful IRC objects and utilities
 
 SYNOPSIS
       ## Import all of the included Tookit:: modules:

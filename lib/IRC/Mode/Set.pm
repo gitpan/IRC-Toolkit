@@ -1,6 +1,6 @@
 package IRC::Mode::Set;
 {
-  $IRC::Mode::Set::VERSION = '0.070002';
+  $IRC::Mode::Set::VERSION = '0.070003';
 }
 
 use 5.10.1;
@@ -14,18 +14,15 @@ use IRC::Toolkit::Modes;
 
 use Scalar::Util 'blessed';
 
-sub _str_to_arr {
+my $str_to_arr = sub {
   ref $_[0] eq 'ARRAY' ? $_[0]
     : [ split //, $_[0] ]
-}
-
-use namespace::clean;
-
+};
 
 has param_always => (
   lazy    => 1,
   is      => 'ro',
-  coerce  => \&_str_to_arr,
+  coerce  => $str_to_arr,
   default => sub {
     [ split //, 'bkohv' ]
   }
@@ -34,7 +31,7 @@ has param_always => (
 has param_on_set => (
   lazy    => 1,
   is      => 'ro',
-  coerce  => \&_str_to_arr,
+  coerce  => $str_to_arr,
   default => sub {
     [ 'l' ]
   }

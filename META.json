@@ -1,5 +1,5 @@
 {
-   "abstract" : "Collected IRC utilities",
+   "abstract" : "Useful IRC objects and utilities",
    "author" : [
       "Jon Portnoy <avenj@cobaltirc.org>"
    ],
@@ -51,6 +51,6 @@
          "web" : "https://github.com/avenj/irc-toolkit"
       }
    },
-   "version" : "0.070002"
+   "version" : "0.070003"
 }
 

@@ -19,6 +19,7 @@ is_deeply( $array,
     [ '-', 'o', 'Joah'  ],
     [ '+', 'v', 'Gilded' ],
   ],
+  'mode_array looks ok'
 ) or diag explain $array;
 
 is_deeply(  $from_string->next, 
@@ -46,7 +47,9 @@ my $from_array = new_ok( $class =>
     mode_array => $array,
   ],
 );
-cmp_ok( $from_array->mode_string, 'eq', '+o-o+v avenj Joah Gilded' );
+cmp_ok( $from_array->mode_string, 'eq', '+o-o+v avenj Joah Gilded',
+  'mode_string looks ok'
+);
 
 my $long = new_ok( $class =>
   [
@@ -65,14 +68,19 @@ is_deeply( $long->mode_array,
     [ '+', 'v', 'miniCruzer' ],
     [ '-', 'b', 'some@mask' ],
   ],
+  'long-string mode_array() looks ok'
 ) or diag explain $long->mode_array;
 
 my @splitm = $long->split_mode_set(4);
 cmp_ok(@splitm, '==', 2, 'split_mode_set spawned 2 sets' )
   or diag explain \@splitm;
 
-cmp_ok($splitm[0]->mode_string, 'eq', '+o-o+o-o avenj avenj Joah Joah' );
-cmp_ok($splitm[1]->mode_string, 'eq', '+vv-b Gilded miniCruzer some@mask' );
+cmp_ok($splitm[0]->mode_string, 'eq', '+o-o+o-o avenj avenj Joah Joah',
+  'split mode_string 1 looks ok'
+);
+cmp_ok($splitm[1]->mode_string, 'eq', '+vv-b Gilded miniCruzer some@mask',
+  'split mode_string 2 looks ok'
+);
 
 my $from_match = $long->new_from_mode('v');
 isa_ok($from_match, $class, 'new_from_mode returned obj' );

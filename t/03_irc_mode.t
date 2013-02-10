@@ -6,10 +6,10 @@ use_ok( 'IRC::Mode::Single' );
 my $mode = new_ok( 'IRC::Mode::Single' =>
   [ '+', 'o', 'avenj' ]
 );
-cmp_ok( $mode->flag, 'eq', '+' );
-cmp_ok( $mode->char, 'eq', 'o' );
-cmp_ok( $mode->param, 'eq', 'avenj' );
-cmp_ok( $mode->as_string, 'eq', '+o avenj' );
-cmp_ok( "$mode", 'eq', '+o avenj' );
+cmp_ok( $mode->flag, 'eq', '+', 'flag() looks ok' );
+cmp_ok( $mode->char, 'eq', 'o', 'char() looks ok' );
+cmp_ok( $mode->param, 'eq', 'avenj', 'param() looks ok' );
+cmp_ok( $mode->as_string, 'eq', '+o avenj', 'as_string looks ok' );
+cmp_ok( "$mode", 'eq', '+o avenj', 'stringification looks ok' );
 
 done_testing;
