@@ -12,6 +12,7 @@ my %WriteMakefileArgs = (
   "ABSTRACT" => "Useful IRC objects and utilities",
   "AUTHOR" => "Jon Portnoy <avenj\@cobaltirc.org>",
   "BUILD_REQUIRES" => {
+    "Test::Exception" => 0,
     "Test::More" => "0.88"
   },
   "CONFIGURE_REQUIRES" => {
@@ -27,9 +28,10 @@ my %WriteMakefileArgs = (
     "Moo" => 1,
     "POE::Filter::IRCv3" => 0,
     "Scalar::Util" => 0,
+    "overload" => 0,
     "strictures" => 1
   },
-  "VERSION" => "0.070003",
+  "VERSION" => "0.071000",
   "test" => {
     "TESTS" => "t/*.t t/02_util/*.t"
   }

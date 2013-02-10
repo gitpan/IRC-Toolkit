@@ -1,6 +1,6 @@
 package IRC::Toolkit::Colors;
 {
-  $IRC::Toolkit::Colors::VERSION = '0.070003';
+  $IRC::Toolkit::Colors::VERSION = '0.071000';
 }
 
 use Carp;

@@ -7,6 +7,13 @@ IRC::Toolkit - Useful IRC objects and utilities
     ## Import all of the included Tookit:: modules:
     use IRC::Toolkit;
 
+    ## Import specific modules:
+    use IRC::Toolkit qw/
+      CTCP
+      Masks
+      Modes
+    /;
+
 # DESCRIPTION
 
 A collection of useful IRC-related utilities. See their respective
@@ -29,6 +36,8 @@ documentation, below.
 [IRC::Toolkit::Modes](http://search.cpan.org/perldoc?IRC::Toolkit::Modes); Mode-line parsing tools
 
 [IRC::Toolkit::Parser](http://search.cpan.org/perldoc?IRC::Toolkit::Parser); Functional interface to [POE::Filter::IRCv3](http://search.cpan.org/perldoc?POE::Filter::IRCv3)
+
+[IRC::Toolkit::TS6](http://search.cpan.org/perldoc?IRC::Toolkit::TS6); Produce TS6 IDs
 
 # SEE ALSO
 

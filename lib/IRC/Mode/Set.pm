@@ -1,6 +1,6 @@
 package IRC::Mode::Set;
 {
-  $IRC::Mode::Set::VERSION = '0.070003';
+  $IRC::Mode::Set::VERSION = '0.071000';
 }
 
 use 5.10.1;
@@ -339,6 +339,8 @@ Resets the L</next> iterator.
 
 Given an integer parameter C<$x>, splits a Set into smaller Sets containing at
 most C<$x> single mode changes.
+
+Defaults to 4, which is a common C<ISUPPORT MODES=> setting.
 
 =head1 AUTHOR
 

@@ -24,9 +24,11 @@ my @modules = qw(
   POE::Filter::IRCv3
   Pod::Coverage::TrustPod
   Scalar::Util
+  Test::Exception
   Test::More
   Test::Pod
   Test::Pod::Coverage
+  overload
   perl
   strictures
 );

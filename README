@@ -5,6 +5,13 @@ SYNOPSIS
       ## Import all of the included Tookit:: modules:
       use IRC::Toolkit;
 
+      ## Import specific modules:
+      use IRC::Toolkit qw/
+        CTCP
+        Masks
+        Modes
+      /;
+
 DESCRIPTION
     A collection of useful IRC-related utilities. See their respective
     documentation, below.
@@ -27,6 +34,8 @@ DESCRIPTION
     IRC::Toolkit::Modes; Mode-line parsing tools
 
     IRC::Toolkit::Parser; Functional interface to POE::Filter::IRCv3
+
+    IRC::Toolkit::TS6; Produce TS6 IDs
 
 SEE ALSO
     IRC::Utils

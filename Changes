@@ -1,5 +1,8 @@
 # Changes for IRC::Toolkit
 
+0.071000  (10 Feb 2013)
+  Add IRC::Toolkit::TS6 ID generator
+
 0.070003  (09 Feb 2013)
   Missing dependency on namespace::clean
    (drop it from Mode::Set)
