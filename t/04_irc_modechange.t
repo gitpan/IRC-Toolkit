@@ -98,4 +98,24 @@ for my $item ($splitm[0]->modes_as_objects) {
   isa_ok($item, 'IRC::Mode::Single')
 }
 
+my $funkyopts = IRC::Mode::Set->new(
+  mode_string  => '+z-o+mg things stuff',
+  param_on_set => 'zg',
+  param_always => 't',
+);
+isa_ok( $funkyopts, $class, 'created obj with weird params' );
+is_deeply( $funkyopts->mode_array,
+  [
+    [ '+', 'z', 'things' ],
+    [ '-', 'o' ],
+    [ '+', 'm' ],
+    [ '+', 'g', 'stuff' ],
+  ],
+  'obj with weird params looks ok'
+);
+is_deeply( $funkyopts->params,
+  [ 'things', 'stuff' ],
+  'params() looks ok'
+);
+
 done_testing;

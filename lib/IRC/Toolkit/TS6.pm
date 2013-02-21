@@ -1,6 +1,6 @@
 package IRC::Toolkit::TS6;
 {
-  $IRC::Toolkit::TS6::VERSION = '0.071000';
+  $IRC::Toolkit::TS6::VERSION = '0.071001';
 }
 use strictures 1;
 use Carp;
@@ -87,12 +87,11 @@ The object stringifies to the current ID.
 
 =head2 as_string
 
-Explicitly stringifies the current ID.
+The C<as_string> method explicitly stringifies the current ID.
 
 =head2 next
 
-Calling B<next> on the object will increment the current ID and return the ID
-as a string.
+The C<next> will increment the current ID and return the ID as a string.
 
 If no more IDs are available, B<next> will croak.
 

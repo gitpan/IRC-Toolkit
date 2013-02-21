@@ -20,6 +20,7 @@ lib/IRC/Toolkit/Parser.pm
 lib/IRC/Toolkit/TS6.pm
 t/00-report-prereqs.t
 t/00_load.t
+t/00_load_selective.t
 t/01_message_obj.t
 t/02_util/case.t
 t/02_util/colors.t

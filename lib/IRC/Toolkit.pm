@@ -1,6 +1,6 @@
 package IRC::Toolkit;
 {
-  $IRC::Toolkit::VERSION = '0.071000';
+  $IRC::Toolkit::VERSION = '0.071001';
 }
 
 use Carp;
@@ -16,10 +16,11 @@ my @modules = qw/
 /;
 
 sub import {
-  my $self = shift;
+  my ($self, @load) = @_;
+  @load = @modules unless @load;
   my $pkg = caller;
   my @failed;
-  for my $mod (@modules) {
+  for my $mod (@load) {
     my $c = "package $pkg; use IRC::Toolkit::$mod";
     eval $c;
     if ($@) {
@@ -42,7 +43,8 @@ IRC::Toolkit - Useful IRC objects and utilities
 
 =head1 SYNOPSIS
 
-  ## Import all of the included Tookit:: modules:
+  ## Import the most commonly used Tookit:: modules
+  ##  (Case, Colors, CTCP, Masks, Modes, and Parser)
   use IRC::Toolkit;
 
   ## Import specific modules:

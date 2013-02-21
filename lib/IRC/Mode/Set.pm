@@ -1,6 +1,6 @@
 package IRC::Mode::Set;
 {
-  $IRC::Mode::Set::VERSION = '0.071000';
+  $IRC::Mode::Set::VERSION = '0.071001';
 }
 
 use 5.10.1;
@@ -202,44 +202,48 @@ IRC::Mode::Set - A set of parsed IRC mode changes
 
 =head1 SYNOPSIS
 
-  ## From a mode string:
+  ## Construct a new set of changes from a mode string:
   my $from_string = IRC::Mode::Set->new(
     mode_string => '+o-o+v avenj Joah Gilded',
 
-    ## Defaults, should vaguely match ISUPPORT CHANMODES parameters:
-    param_always => [ split //, 'bkohv' ],
-    param_on_set => [ 'l' ],
+    ## Optionally specify modes that take parameters (always or when set)
+    ## defaults, should vaguely match ISUPPORT CHANMODES parameters:
+    param_always => 'bkohv',
+    param_on_set => 'l',
   );
 
   my $mode_array = $from_string->mode_array;
   ## $mode_array looks like:
+  ## [
   ##   [ '+', 'o', 'avenj' ],
   ##   [ '-', 'o', 'Joah'  ],
   ##   [ '+', 'v', 'Gilded' ],
+  ## ]
 
   ## Iterate over each mode change:
   while (my $change = $from_string->next) {
     ## $change is set to each individual array as seen above, in turn
   }
 
-  ## Reset ->next() iterator:
+  ## Reset ->next() iterator to top:
   $from_string->reset;
 
-  ## Like above, but get IRC::Mode::Single objects:
+  ## Like above loop, but get IRC::Mode::Single objects:
   while (my $this_mode = $from_string->next(as_object => 1) ) {
     ## $this_mode is an IRC::Mode::Single
   }
 
-  ## Create a new mode set from an ARRAY
-  ## (such as produced by IRC::Toolkit::Modes)
+  ## Construct a new set of changes from an ARRAY
+  ## (such as produced by IRC::Toolkit::Modes):
   my $from_array = IRC::Mode::Set->new(
     mode_array => $array,
   );
 
-  ## Get a string back out:
+  ## Get an IRC-appropriate string back out:
   my $str_from_array = $from_array->mode_string;
 
-  ## Split a Set into multiple Sets with a max of $count items each:
+  ## Split a Set into multiple Sets with a max of $count items each
+  ## (defaults to 4 changes per set if none specified)
   my @sets = $from_array->split_mode_set($count);
   
   ## Create a new Set containing matching items from this Set:
