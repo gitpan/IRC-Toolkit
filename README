@@ -30,6 +30,8 @@ DESCRIPTION
 
     IRC::Toolkit::CTCP; CTCP quoting and extraction tools
 
+    IRC::Toolkit::ISupport; ISUPPORT (numeric 005) parser
+
     IRC::Toolkit::Masks; Hostmask parsing and matching tools
 
     IRC::Toolkit::Modes; Mode-line parsing tools

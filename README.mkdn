@@ -32,6 +32,8 @@ documentation, below.
 
 [IRC::Toolkit::CTCP](http://search.cpan.org/perldoc?IRC::Toolkit::CTCP); CTCP quoting and extraction tools
 
+[IRC::Toolkit::ISupport](http://search.cpan.org/perldoc?IRC::Toolkit::ISupport); ISUPPORT (numeric 005) parser
+
 [IRC::Toolkit::Masks](http://search.cpan.org/perldoc?IRC::Toolkit::Masks); Hostmask parsing and matching tools
 
 [IRC::Toolkit::Modes](http://search.cpan.org/perldoc?IRC::Toolkit::Modes); Mode-line parsing tools

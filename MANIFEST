@@ -14,6 +14,7 @@ lib/IRC/Toolkit.pm
 lib/IRC/Toolkit/CTCP.pm
 lib/IRC/Toolkit/Case.pm
 lib/IRC/Toolkit/Colors.pm
+lib/IRC/Toolkit/ISupport.pm
 lib/IRC/Toolkit/Masks.pm
 lib/IRC/Toolkit/Modes.pm
 lib/IRC/Toolkit/Parser.pm
@@ -25,6 +26,7 @@ t/01_message_obj.t
 t/02_util/case.t
 t/02_util/colors.t
 t/02_util/ctcp.t
+t/02_util/isupport.t
 t/02_util/mask.t
 t/02_util/modes.t
 t/02_util/parser.t

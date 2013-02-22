@@ -1,5 +1,8 @@
 # Changes for IRC::Toolkit
 
+0.072000  (22 Feb 2013)
+  Add IRC::Toolkit::ISupport
+
 0.071001  (21 Feb 2013)
   Fix 'use IRC::Toolkit qw/ ... /' imports
 

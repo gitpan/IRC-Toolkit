@@ -1,0 +1,111 @@
+use Test::More;
+use strict; use warnings FATAL => 'all';
+
+BEGIN { use_ok( 'IRC::Toolkit::ISupport' ) }
+
+### Feeding raw lines
+my @lines = (
+   ':eris.oppresses.us 005 meh CHANLIMIT=#&:25 CHANNELLEN=50 ' .
+   'CHANMODES=eIqdb,k,l,cimnpstCMRS AWAYLEN=160 KNOCK ELIST=CMNTU SAFELIST ' .
+   'EXCEPTS=e INVEX=I :are supported by this server',
+
+   ':eris.oppresses.us 005 meh CALLERID CASEMAPPING=rfc1459 DEAF=D ' .
+   'KICKLEN=160 MODES=4 NICKLEN=30 PREFIX=(ohv)@%+ STATUSMSG=@%+ ' .
+   'TOPICLEN=390 NETWORK=blackcobalt MAXLIST=bdeI:80 MAXTARGETS=10 ' .
+   'CHANTYPES=#& :are supported by this server',
+);
+
+my $isup = parse_isupport(@lines);
+## Bool-type
+ok( $isup->callerid, 'callerid() ok' );
+ok( !$isup->nonexistant, 'nonexistant key is negative' );
+
+## Numeric-type
+cmp_ok( $isup->channellen, '==', 50, 'channellen() ok' );
+cmp_ok( $isup->awaylen, '==', 160, 'awaylen() ok' );
+cmp_ok( $isup->kicklen, '==', 160, 'kicklen() ok' );
+cmp_ok( $isup->modes, '==', 4, 'modes() ok' );
+cmp_ok( $isup->nicklen, '==', 30, 'nicklen() ok' );
+
+## String-type
+cmp_ok( $isup->excepts, 'eq', 'e', 'excepts() ok' );
+cmp_ok( $isup->invex, 'eq', 'I', 'invex() ok' );
+cmp_ok( $isup->network, 'eq', 'blackcobalt', 'network() ok' );
+
+## Specials
+
+# chanlimit()
+is_deeply( $isup->chanlimit,
+  { '#' => 25, '&' => 25 },
+  'chanlimit() HASH ok'
+);
+cmp_ok( $isup->chanlimit('#'), '==', 25, 'chanlimit() OBJ ok' );
+ok( !$isup->chanlimit('+'), 'chanlimit ne compare' );
+
+# chanmodes()
+is_deeply( $isup->chanmodes,
+  {
+    list    => [ split '', 'eIqdb' ],
+    always  => [ 'k' ],
+    whenset => [ 'l' ],
+    bool    => [ split '', 'cimnpstCMRS' ],
+  },
+  'chanmodes() HASH ok'
+);
+is_deeply( $isup->chanmodes->list,
+  [ split '', 'eIqdb' ],
+  'chanmodes->list() ok'
+);
+is_deeply( $isup->chanmodes->always,
+  [ 'k' ],
+  'chanmodes->always() ok'
+);
+is_deeply( $isup->chanmodes->whenset,
+  [ 'l' ],
+  'chanmodes->whenset() ok'
+);
+is_deeply( $isup->chanmodes->bool,
+  [ split '', 'cimnpstCMRS' ],
+  'chanmodes->bool() ok'
+);
+
+# chantypes()
+is_deeply( $isup->chantypes,
+  +{ '#' => 1, '&' => 1 },
+  'chantypes() HASH ok'
+);
+ok( $isup->chantypes('#'), 'chantypes OBJ ok' );
+ok( !$isup->chantypes('+'), 'chantypes ne compare' );
+
+# maxlist()
+is_deeply( $isup->maxlist,
+  +{ map {; $_ => 80 } qw/ b d e I / },
+  'maxlist() HASH ok'
+);
+cmp_ok( $isup->maxlist('d'), '==', 80, 'maxlist OBJ ok' );
+ok( !$isup->maxlist('f'), 'maxlist ne compare' );
+
+# prefix()
+is_deeply( $isup->prefix,
+  +{ o => '@', h => '%', v => '+' },
+  'prefix() HASH ok'
+);
+cmp_ok( $isup->prefix('o'), 'eq', '@', 'prefix() OBJ ok' );
+ok( !$isup->prefix('a'), 'prefix ne compare' );
+
+# statusmsg()
+is_deeply( $isup->statusmsg,
+  +{ '+' => 1, '%' => 1, '@' => 1 },
+  'statusmsg() HASH ok'
+);
+ok( $isup->statusmsg('@'), 'statusmsg() OBJ ok' );
+ok( !$isup->statusmsg('!'), 'statusmsg ne compare' );
+
+### Feeding objs
+use IRC::Message::Object 'ircmsg';
+my @objs = map {; ircmsg($_) } @lines;
+undef $isup; $isup = parse_isupport(@objs);
+cmp_ok( $isup->awaylen, '==', 160, '2 awaylen() ok' );
+cmp_ok( $isup->kicklen, '==', 160, '2 kicklen() ok' );
+
+done_testing;

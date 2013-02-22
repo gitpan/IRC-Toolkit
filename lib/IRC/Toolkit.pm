@@ -1,6 +1,6 @@
 package IRC::Toolkit;
 {
-  $IRC::Toolkit::VERSION = '0.071001';
+  $IRC::Toolkit::VERSION = '0.072000';
 }
 
 use Carp;
@@ -70,6 +70,8 @@ L<IRC::Toolkit::Case>; RFC-compliant case folding tools
 L<IRC::Toolkit::Colors>; Color/format interpolation in strings
 
 L<IRC::Toolkit::CTCP>; CTCP quoting and extraction tools
+
+L<IRC::Toolkit::ISupport>; ISUPPORT (numeric 005) parser
 
 L<IRC::Toolkit::Masks>; Hostmask parsing and matching tools
 
