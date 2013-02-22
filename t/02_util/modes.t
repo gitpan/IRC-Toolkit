@@ -16,7 +16,8 @@ is_deeply(
   ],
   'mode_to_array chan modes ok'
 );
-my $array = mode_to_array( '+o-o+vb avenj avenj Joah things@stuff' );
+my $mstr = '+o-o+vb avenj avenj Joah things@stuff';
+my $array = mode_to_array($mstr);
 is_deeply( $array,
   [
     [ '+', 'o', 'avenj' ],
@@ -27,6 +28,15 @@ is_deeply( $array,
   'mode_to_array status modes ok'
 ) or diag explain $array;
 
+
+cmp_ok( array_to_mode($array), 'eq', $mstr,
+  'array_to_mode ok'
+);
+
+cmp_ok( array_to_mode( mode_to_array('+a-z') ),
+  'eq', '+a-z',
+  'array_to_mode (no params) ok'
+);
 
 
 my $mhash;

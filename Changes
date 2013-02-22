@@ -1,5 +1,10 @@
 # Changes for IRC::Toolkit
 
+0.074000  (22 Feb 2013)
+  Add IRC::Toolkit::Modes::array_to_mode()
+
+  Document ISUPPORT EXTBAN parser
+
 0.073000  (22 Feb 2013)
   Add ELIST, EXTBAN, and TARGMAX support to ISupport parser
 

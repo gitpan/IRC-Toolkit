@@ -1,34 +1,43 @@
 package IRC::Toolkit::Modes;
 {
-  $IRC::Toolkit::Modes::VERSION = '0.073000';
+  $IRC::Toolkit::Modes::VERSION = '0.074000';
 }
-
+use 5.10.1;
 use Carp;
 use strictures 1;
 
 use Exporter 'import';
 our @EXPORT = qw/
+  array_to_mode
   mode_to_array
   mode_to_hash
 /;
 
 
-=pod
+sub array_to_mode {
+  my ($array) = @_;
+  confess "Expected an ARRAY but got $array" 
+    unless ref $array eq 'ARRAY';
+  my @items = @$array;
 
-=for Pod::Coverage mode_array_to_str mode_hash_to_str
+  my $mstr;
+  my $curflag = my $pstr = '';
+  while (my $cset = shift @items) {
+    my ($flag, $mode, $param) = @$cset;
+    confess "Appear to have been given an invalid mode array"
+      unless defined $flag and defined $mode;
 
-=cut
+    if ($flag eq $curflag) {
+      $mstr   .= $mode;
+    } else {
+      $mstr   .= $flag . $mode;
+      $curflag = $flag
+    }
+    $pstr     .= " $param" if defined $param;
+  }
 
-sub mode_array_to_str {
-  my ($self, $array, $maxmodes) = @_;
-  ## FIXME
-  die "Unimplemented"
-}
-
-sub mode_hash_to_str {
-  my ($self, $hash, $maxmodes) = @_;
-  ## FIXME
-  die "Unimplemented"
+  $mstr .= $pstr if length $pstr;
+  $mstr
 }
 
 sub mode_to_array {
@@ -128,6 +137,8 @@ IRC::Toolkit::Modes - IRC mode parsing utilities
 
 Utility functions for parsing IRC mode strings.
 
+Also see L<IRC::Mode::Set> for an object-oriented approach to modes.
+
 =head2 mode_to_array
 
   my $array = mode_to_array(
@@ -173,6 +184,11 @@ For example:
 (If the mode string contains (space-delimited) parameters, they are given
 precedence ahead of the optional 'params' ARRAY.)
 
+=head2 array_to_mode
+
+Takes an ARRAY such as that produced by L</mode_to_array> and returns an IRC
+mode string.
+
 =head2 mode_to_hash
 
 Takes the same parameters as L</mode_to_array> -- this is just a way to
@@ -204,9 +220,7 @@ parameters, e.g.:
   }
 
 This is a 'lossy' approach that won't deal well with multiple conflicting mode
-changes in a single line; it is useful for internal mode examination, but
-L</mode_to_array> should generally be preferred for IRC-directed mode
-handling.
+changes in a single line; L</mode_to_array> should generally be preferred.
 
 =head1 AUTHOR
 

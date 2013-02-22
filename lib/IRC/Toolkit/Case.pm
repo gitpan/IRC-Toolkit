@@ -1,8 +1,7 @@
 package IRC::Toolkit::Case;
 {
-  $IRC::Toolkit::Case::VERSION = '0.073000';
+  $IRC::Toolkit::Case::VERSION = '0.074000';
 }
-
 use strictures 1;
 
 use Exporter 'import';

@@ -1,6 +1,6 @@
 package IRC::Toolkit::ISupport;
 {
-  $IRC::Toolkit::ISupport::VERSION = '0.073000';
+  $IRC::Toolkit::ISupport::VERSION = '0.074000';
 }
 use 5.10.1;
 use Carp 'confess';
@@ -15,7 +15,7 @@ our @EXPORT = 'parse_isupport';
 
 my $parse_simple_flags = sub {
   my ($val) = @_;
-  +{ map {; $_ => 1 } split '', $val }
+  +{ map {; $_ => 1 } split '', ( $val // '' ) }
 };
 
 my $parse = +{
@@ -51,7 +51,10 @@ my $parse = +{
   extban    => sub {
     my ($val) = @_;
     my ($prefix, $flags) = split /,/, $val;
-    +{ prefix => $prefix, flags => [ split '', $flags ] }
+    +{ 
+      prefix => $prefix, 
+      flags  => [ split '', ( $flags // '' ) ] 
+    }
   },
 
   maxlist => sub {
@@ -325,6 +328,14 @@ Without any arguments, returns a HASH whose keys are the supported ELIST
 tokens.
 
 With a token specified, returns boolean true if the token is enabled.
+
+=head3 extban
+
+Returns an object with two methods:
+
+B<prefix> returns the extended ban prefix character.
+
+B<flags> returns the supported extended ban flags as an ARRAY of flags.
 
 =head3 maxlist
 
