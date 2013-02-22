@@ -1,6 +1,6 @@
 package IRC::Toolkit::Modes;
 {
-  $IRC::Toolkit::Modes::VERSION = '0.072000';
+  $IRC::Toolkit::Modes::VERSION = '0.073000';
 }
 
 use Carp;

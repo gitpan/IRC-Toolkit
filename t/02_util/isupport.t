@@ -6,12 +6,13 @@ BEGIN { use_ok( 'IRC::Toolkit::ISupport' ) }
 ### Feeding raw lines
 my @lines = (
    ':eris.oppresses.us 005 meh CHANLIMIT=#&:25 CHANNELLEN=50 ' .
-   'CHANMODES=eIqdb,k,l,cimnpstCMRS AWAYLEN=160 KNOCK ELIST=CMNTU SAFELIST ' .
-   'EXCEPTS=e INVEX=I :are supported by this server',
+   'CHANMODES=eIqdb,k,l,cimnpstCMRS AWAYLEN=160 KNOCK ELIST=CTU SAFELIST ' .
+   'EXCEPTS=e INVEX=I EXTBAN=$,gnp :are supported by this server',
 
    ':eris.oppresses.us 005 meh CALLERID CASEMAPPING=rfc1459 DEAF=D ' .
    'KICKLEN=160 MODES=4 NICKLEN=30 PREFIX=(ohv)@%+ STATUSMSG=@%+ ' .
-   'TOPICLEN=390 NETWORK=blackcobalt MAXLIST=bdeI:80 MAXTARGETS=10 ' .
+   'TOPICLEN=390 NETWORK=blackcobalt MAXLIST=bdeI:80 ' .
+   'TARGMAX=NAMES:1,LIST:1,KICK:1,WHOIS:1,PRIVMSG:4,NOTICE:4,ACCEPT:,MONITOR: '.
    'CHANTYPES=#& :are supported by this server',
 );
 
@@ -74,8 +75,27 @@ is_deeply( $isup->chantypes,
   +{ '#' => 1, '&' => 1 },
   'chantypes() HASH ok'
 );
-ok( $isup->chantypes('#'), 'chantypes OBJ ok' );
+ok( $isup->chantypes('#'), 'chantypes() OBJ ok' );
 ok( !$isup->chantypes('+'), 'chantypes ne compare' );
+
+# elist()
+is_deeply( $isup->elist,
+  +{ map {; $_ => 1 } split '', 'CTU' },
+  'elist() HASH ok'
+);
+ok( $isup->elist('C'), 'elist() OBJ ok' );
+ok( !$isup->elist('M'), 'elist ne compare' );
+
+# extban()
+is_deeply( $isup->extban,
+  +{ prefix => '$', flags => [ split '', 'gnp' ] },
+  'extban() HASH ok'
+);
+cmp_ok( $isup->extban->prefix, 'eq', '$', 'extban->prefix() ok' );
+is_deeply( $isup->extban->flags,
+  [ split '', 'gnp' ],
+  'extban->flags() ok'
+);
 
 # maxlist()
 is_deeply( $isup->maxlist,
@@ -100,6 +120,11 @@ is_deeply( $isup->statusmsg,
 );
 ok( $isup->statusmsg('@'), 'statusmsg() OBJ ok' );
 ok( !$isup->statusmsg('!'), 'statusmsg ne compare' );
+
+# targmax()
+cmp_ok( $isup->targmax('names'), '==', 1, 'targmax(names) == 1' );
+cmp_ok( $isup->targmax('privmsg'), '==', 4, 'targmax(privmsg) == 4' );
+ok( !$isup->targmax('accept'), 'targmax for unlimited returns false' );
 
 ### Feeding objs
 use IRC::Message::Object 'ircmsg';

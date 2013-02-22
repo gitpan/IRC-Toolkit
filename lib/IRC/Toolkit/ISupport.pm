@@ -1,6 +1,6 @@
 package IRC::Toolkit::ISupport;
 {
-  $IRC::Toolkit::ISupport::VERSION = '0.072000';
+  $IRC::Toolkit::ISupport::VERSION = '0.073000';
 }
 use 5.10.1;
 use Carp 'confess';
@@ -13,21 +13,23 @@ use IRC::Message::Object 'ircmsg';
 use Exporter 'import';
 our @EXPORT = 'parse_isupport';
 
+my $parse_simple_flags = sub {
+  my ($val) = @_;
+  +{ map {; $_ => 1 } split '', $val }
+};
+
 my $parse = +{
 
   chanlimit => sub {
     my ($val) = @_;
-    my @chunks = split /,/, $val;
-
     my $ref = {};
-    for my $chunk (@chunks) {
+    for my $chunk (split /,/, $val) {
       my ($prefixed, $num) = split /:/, $chunk;
       my @prefixes = split '', $prefixed;
       for my $pfx (@prefixes) {
         $ref->{$pfx} = $num
       }
     }
-
     $ref
   },
 
@@ -35,31 +37,33 @@ my $parse = +{
     my ($val) = @_;
     my ($list, $always, $whenset, $bool) = split /,/, $val;
     +{
-      list    => [ split '', $list ],
-      always  => [ split '', $always ],
-      whenset => [ split '', $whenset ],
-      bool    => [ split '', $bool ],
+      list    => [ split '', ( $list    // '' ) ],
+      always  => [ split '', ( $always  // '' ) ],
+      whenset => [ split '', ( $whenset // '' ) ],
+      bool    => [ split '', ( $bool    // '' ) ],
     }
   },
 
-  chantypes => sub {
+  chantypes => $parse_simple_flags,
+
+  elist     => $parse_simple_flags,
+
+  extban    => sub {
     my ($val) = @_;
-    +{  map {; $_ => 1 } split '', $val }
+    my ($prefix, $flags) = split /,/, $val;
+    +{ prefix => $prefix, flags => [ split '', $flags ] }
   },
 
   maxlist => sub {
     my ($val) = @_;
-    my @chunks = split /,/, $val;
-
     my $ref = {};
-    for my $chunk (@chunks) {
+    for my $chunk (split /,/, $val) {
       my ($modes, $num) = split /:/, $chunk;
       my @splitm = split '', $modes;
       for my $mode (@splitm) {
         $ref->{$mode} = $num
       }
     }
-
     $ref
   },
 
@@ -75,16 +79,24 @@ my $parse = +{
       return +{}
     }
 
-    my $ref;
+    my $ref = {};
     for my $mode (@modes) {
       $ref->{$mode} = shift @pfxs
     }
     $ref
   },
 
-  statusmsg => sub {
+  statusmsg => $parse_simple_flags,
+
+  targmax => sub {
     my ($val) = @_;
-    +{ map {; $_ => 1 } split '', $val }
+    my $ref = {};
+    TARGTYPE: for my $chunk (split /,/, $val) {
+      my ($type, $lim) = split /:/, $chunk, 2;
+      next TARGTYPE unless defined $lim;
+      $ref->{ lc $type } = $lim;
+    }
+    $ref
   },
 
 };
@@ -107,8 +119,8 @@ sub _isupport_hash {
     return +{}
   }
 
-  for my $param (map {; lc $_ } keys %split) {
-    if (defined $parse->{$param}) {
+  for my $param (keys %split) {
+    if (defined $parse->{$param} && defined $split{$param}) {
       $cur{$param} = $parse->{$param}->($split{$param})
     } else {
       $cur{$param} = $split{$param} 
@@ -120,7 +132,7 @@ sub _isupport_hash {
 
 sub _isupport_hash_to_obj {
   my ($isupport_hash) = @_;
-  IRC::Toolkit::ISupport::Obj->new($isupport_hash)
+  IRC::Toolkit::ISupport::Obj->__new($isupport_hash)
 }
 
 sub parse_isupport {
@@ -151,17 +163,26 @@ sub parse_isupport {
   IRC::Toolkit::_ISchanmodes;
   use Carp 'confess';
   use strictures 1;
-
   sub new {
-    my ($cls, $self) = @_;
-    confess 'Expected a HASH' unless ref $self eq 'HASH';
-    bless $self, $cls 
+    my ($cls, %self) = @_;
+    bless +{%self}, $cls 
   }
-
   sub list    { $_[0]->{list} }
   sub always  { $_[0]->{always} }
   sub whenset { $_[0]->{whenset} }
   sub bool    { $_[0]->{bool} }
+}
+
+{ package
+  IRC::Toolkit::_ISextban;
+  use Carp 'confess';
+  use strictures 1;
+  sub new {
+    my ($cls, %self) = @_;
+    bless +{%self}, $cls
+  }
+  sub prefix { $_[0]->{prefix} }
+  sub flags  { $_[0]->{flags}  }
 }
 
 { package
@@ -171,64 +192,49 @@ sub parse_isupport {
   use strictures 1;
   use Scalar::Util 'blessed';
 
-  sub new {
+  { no strict 'refs';
+    for my $acc (qw/ 
+      chanlimit
+      chantypes
+      elist
+      maxlist
+      prefix
+      statusmsg
+      targmax
+    / ) {
+      *{ __PACKAGE__ .'::'. $acc } = sub {
+          my ($ins, $val) = @_;
+          return ($ins->{$acc} // {}) unless defined $val;
+          $ins->{$acc}->{$val}
+      };
+    }
+  }
+
+  sub __new {
     my ($cls, $self) = @_;
     confess "Expected a HASH from _isupport_hash"
       unless ref $self eq 'HASH';
     bless $self, $cls
   }
 
-  sub add {
-    my ($self, @items) = @_;
-    my %cur = %$self;
-    for my $item (@items) {
-      confess "Expected HASH or ISupport::Obj, got $item"
-        unless blessed $item
-        or ref $item eq 'HASH';
-
-      @cur{keys %$item} = values %$item;
-    }
-    (ref $self || $self)->new(\%cur)
-  }
-
-  sub chanlimit {
-    my ($self, $val) = @_;
-    return ($self->{chanlimit} // {}) unless defined $val;
-    $self->{chanlimit}->{$val}
-  }
-
   sub chanmodes {
     my ($self) = @_;
     return unless $self->{chanmodes};
     unless (blessed $self->{chanmodes}) {
-      $self->{chanmodes} = 
-        IRC::Toolkit::_ISchanmodes->new($self->{chanmodes})
+      return $self->{chanmodes} = 
+        IRC::Toolkit::_ISchanmodes->new(%{$self->{chanmodes}})
     }
     $self->{chanmodes}
   }
 
-  sub chantypes {
-    my ($self, $val) = @_;
-    return ($self->{chantypes} // {}) unless defined $val;
-    $self->{chantypes}->{$val}
-  }
-
-  sub maxlist {
-    my ($self, $val) = @_;
-    return ($self->{maxlist} // {}) unless defined $val;
-    $self->{maxlist}->{$val}
-  }
-
-  sub prefix {
-    my ($self, $val) = @_;
-    return ($self->{prefix} // {}) unless defined $val;
-    $self->{prefix}->{$val}
-  }
-
-  sub statusmsg {
-    my ($self, $val) = @_;
-    return ($self->{statusmsg} // {}) unless defined $val;
-    $self->{statusmsg}->{$val}
+  sub extban {
+    my ($self) = @_;
+    return unless $self->{extban};
+    unless (blessed $self->{extban}) {
+      return $self->{extban} =
+        IRC::Toolkit::_ISextban->new(%{$self->{extban}})
+    }
+    $self->{extban}
   }
 
   ## Everything else is bool / int / str we can't parse
@@ -313,6 +319,13 @@ prefixes.
 If given a channel prefix, returns boolean true if the channel prefix is
 allowed per CHANTYPES.
 
+=head3 elist
+
+Without any arguments, returns a HASH whose keys are the supported ELIST
+tokens.
+
+With a token specified, returns boolean true if the token is enabled.
+
 =head3 maxlist
 
 Without any arguments, returns a HASH mapping list-type modes (see
@@ -335,26 +348,14 @@ status prefixes.
 If given a status prefix, returns boolean true if the prefix is listed in
 STATUSMSG.
 
-=head1 MISSING
+=head3 targmax
 
-... typically because I'm not sure if there's authoritative documentation or
-where it might be found ...
+Given a target type (as of this writing charybdis specifies 
+'names', 'list', 'kick', 'whois', 'privmsg', 'notice', 'accept', 'monitor'), 
+returns the TARGMAX definition for that type, if present.
 
-=over
-
-=item *
-
-ELIST
-
-=item *
-
-EXTBAN
-
-=item *
-
-TARGMAX
-
-=back
+Returns undef if the specified TARGMAX key is nonexistant or has no limit
+defined.
 
 =head1 AUTHOR
 
