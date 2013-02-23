@@ -1,5 +1,15 @@
 # Changes for IRC::Toolkit
 
+0.080000  (23 Feb 2013)
+  Incompatible change:
+   IRC::Mode::Set->new_from_params renamed ->clone_from_params
+   IRC::Mode::Set->new_from_mode   renamed ->clone_from_mode
+
+  Add IRC::Mode::Set->clone() and ->export()
+
+  IRC::Message::Object;
+   Fix filter + raw_line combination at construction-time
+
 0.075000  (23 Feb 2013)
   Add IRC::Message::Object->truncate
   Expose ->filter and ->colonify attribs

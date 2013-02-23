@@ -1,6 +1,6 @@
 package IRC::Mode::Set;
 {
-  $IRC::Mode::Set::VERSION = '0.075000';
+  $IRC::Mode::Set::VERSION = '0.080000';
 }
 
 use 5.10.1;
@@ -13,6 +13,7 @@ use IRC::Mode::Single;
 use IRC::Toolkit::Modes;
 
 use Scalar::Util 'blessed';
+use Storable 'dclone';
 
 my $str_to_arr = sub {
   ref $_[0] eq 'ARRAY' ? $_[0]
@@ -108,25 +109,46 @@ sub split_mode_set {
   @new
 }
 
-sub new_from_mode {
+
+sub clone {
+  my ($self) = @_;
+  (ref $self)->new(mode_array => dclone($self->mode_array))
+}
+
+sub clone_from_mode {
   my ($self, $mode) = @_;
   my @match = grep {; $_->[1] eq $mode } @{ $self->mode_array };
   return unless @match;
   blessed($self)->new(
-    mode_array => [ @match ],
+    mode_array => dclone(\@match),
   )
 }
 
-sub new_from_params {
+sub clone_from_params {
   my ($self, $regex) = @_;
   my @match = grep {;
     defined($_->[2]) and $_->[2] =~ m/$regex/
   } @{ $self->mode_array };
   return unless @match;
   blessed($self)->new(
-    mode_array => [ @match ],
+    mode_array => dclone(\@match),
   )
 }
+
+=pod
+
+=for Pod::Coverage new_from_(mode|params)
+
+=cut
+
+## FIXME deprecated, remove Soon
+sub new_from_mode {
+  confess "new_from_mode() is deprecated; use clone_from_mode"
+}
+sub new_from_params {
+  confess "new_from_params() is deprecated; use clone_from_params"
+}
+
 
 sub modes_as_objects {
   my ($self) = @_;
@@ -231,8 +253,8 @@ IRC::Mode::Set - A set of parsed IRC mode changes
   my @sets = $from_array->split_mode_set($count);
   
   ## Create a new Set containing matching items from this Set:
-  my $modes_match = $from_array->new_from_mode('v');
-  my $args_match  = $from_array->new_from_params('Joah');
+  my $modes_match = $from_array->clone_from_mode('v');
+  my $args_match  = $from_array->clone_from_params('Joah');
 
 =head1 DESCRIPTION
 
@@ -264,18 +286,21 @@ B<param_on_set> can be specified (as a string or an ARRAY of modes) to
 indicate modes that are expected to take a parameter only when set. Defaults
 to 'l'
 
-=head2 new_from_mode
+See L<IRC::Toolkit::ISupport> for an easy way to retrieve these values from a
+parsed ISUPPORT (005) numeric.
 
-Called on an instanced Mode::Set.
+=head2 clone
+
+Clone the instanced Mode::Set.
+
+=head2 clone_from_mode
 
 Takes a single mode character.
 
-Returns a new Mode::Set composed of only modes in the existing set modifying
+Returns a new Mode::Set composed of only modes in the existing set containing 
 the specified mode character.
 
-=head2 new_from_params
-
-Called on an instanced Mode::Set.
+=head2 clone_from_params
 
 Takes a pattern or regexp object.
 

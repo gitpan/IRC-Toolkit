@@ -50,7 +50,7 @@ AUTHOR
 
     Portions of code are derived from IRC::Utils, Net::IRC, and
     POE::Filter::IRC::Compat, which are copyright their respective authors;
-    these items are documented where they are found, as well.
+    these items are documented where they are found.
 
     Licensed under the same terms as Perl.
 

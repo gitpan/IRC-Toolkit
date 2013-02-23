@@ -22,9 +22,10 @@ requires:
   Moo: 1
   POE::Filter::IRCv3: 0
   Scalar::Util: 0
+  Storable: 0
   overload: 0
   perl: v5.10.1
   strictures: 1
 resources:
   repository: git://github.com/avenj/irc-toolkit.git
-version: 0.075000
+version: 0.080000

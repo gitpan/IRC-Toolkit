@@ -79,10 +79,23 @@ cmp_ok( length $trunc_without_tags->raw_line, '==', 510,
 cmp_ok( $trunc_without_tags->command, 'eq', 'PRIVMSG',
   'truncate() command ok'
 );
+cmp_ok( $trunc_without_tags->params->[0], 'eq', '#somewhere',
+  'truncate() param 0 ok'
+);
+cmp_ok( $trunc_without_tags->params->[1], '=~', qr/^X+$/,
+  'truncate() param 1 ok'
+);
 
 my $orig_with_tags  = ircmsg(raw_line => $long_with_tags);
-my $trunc_with_tags = $orig_with_tags->truncate;
-ok( $trunc_with_tags->has_tag('foobar'), 'has_tag after truncate ok' );
+my $trunc = $orig_with_tags->truncate;
+ok( $trunc->has_tag('foobar'), 'has_tag after truncate ok' );
+
+ok(
+  (grep {; $_ eq 'foobar' } @{ $trunc->tags_as_array }) &&
+  (grep {; $_ eq 'znc.in/extension=value' } @{ $trunc->tags_as_array }) &&
+  (grep {; $_ eq 'intent=ACTION' } @{ $trunc->tags_as_array }),
+  'tags_as_array after truncate ok'
+) or diag explain $trunc->tags_as_array;
 
 
 done_testing;

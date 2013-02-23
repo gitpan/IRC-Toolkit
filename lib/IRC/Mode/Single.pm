@@ -1,6 +1,6 @@
 package IRC::Mode::Single;
 {
-  $IRC::Mode::Single::VERSION = '0.075000';
+  $IRC::Mode::Single::VERSION = '0.080000';
 }
 
 use 5.10.1;
@@ -41,6 +41,11 @@ sub as_string {
   $str
 }
 
+sub export {
+  my ($self) = @_;
+  [ @$self ]
+}
+
 1;
 
 =pod
@@ -62,6 +67,7 @@ IRC::Mode::Single - A single IRC mode change
 =head1 DESCRIPTION
 
 A simple ARRAY-type object representing a single mode change.
+These objects stringify into an IRC mode string.
 
 Can be used to turn L<IRC::Toolkit::Modes/mode_to_array> mode ARRAYs
 into objects:
@@ -77,10 +83,6 @@ Also see L<IRC::Mode::Set>
 
 Constructs a new mode change; expects at least a flag and mode.
 
-=head2 as_string
-
-Produces a mode string (with params attached) for this single mode change.
-
 =head2 char
 
 The mode character.
@@ -92,6 +94,14 @@ The '-' or '+' flag for this mode change.
 =head2 param
 
 The parameter attached to the mode, if any.
+
+=head2 as_string
+
+Produces a mode string (with params attached) for this single mode change.
+
+=head2 export
+
+Retrieve the backing ARRAY without bless/overload magic.
 
 =head1 AUTHOR
 

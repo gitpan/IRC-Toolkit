@@ -1,6 +1,6 @@
 package IRC::Toolkit::ISupport;
 {
-  $IRC::Toolkit::ISupport::VERSION = '0.075000';
+  $IRC::Toolkit::ISupport::VERSION = '0.080000';
 }
 use 5.10.1;
 use Carp 'confess';

@@ -58,8 +58,7 @@ my $long = new_ok( $class =>
   ],
 );
 
-is_deeply( $long->mode_array,
-  [
+my $expected_long = [
     [ '+', 'o', 'avenj' ],
     [ '-', 'o', 'avenj' ],
     [ '+', 'o', 'Joah'  ],
@@ -67,7 +66,9 @@ is_deeply( $long->mode_array,
     [ '+', 'v', 'Gilded' ],
     [ '+', 'v', 'miniCruzer' ],
     [ '-', 'b', 'some@mask' ],
-  ],
+];
+
+is_deeply( $long->mode_array, $expected_long,
   'long-string mode_array() looks ok'
 ) or diag explain $long->mode_array;
 
@@ -82,16 +83,22 @@ cmp_ok($splitm[1]->mode_string, 'eq', '+vv-b Gilded miniCruzer some@mask',
   'split mode_string 2 looks ok'
 );
 
-my $from_match = $long->new_from_mode('v');
-isa_ok($from_match, $class, 'new_from_mode returned obj' );
-cmp_ok($from_match->mode_string, 'eq', '+vv Gilded miniCruzer', 
-  'new_from_mode mode_string looks ok'
+my $cloned = $long->clone;
+isa_ok( $cloned, 'IRC::Mode::Set', 'clone() returned obj' );
+is_deeply( $cloned->mode_array, $expected_long,
+  'cloned obj looks ok'
 );
 
-$from_match = $long->new_from_params(qr/Gilded/);
-isa_ok($from_match, $class, 'new_from_params returned obj' );
+my $from_match = $long->clone_from_mode('v');
+isa_ok($from_match, $class, 'clone_from_mode returned obj' );
+cmp_ok($from_match->mode_string, 'eq', '+vv Gilded miniCruzer', 
+  'clone_from_mode mode_string looks ok'
+);
+
+$from_match = $long->clone_from_params(qr/Gilded/);
+isa_ok($from_match, $class, 'clone_from_params returned obj' );
 cmp_ok($from_match->mode_string, 'eq', '+v Gilded',
-  'new_from_params mode_string looks ok'
+  'clone_from_params mode_string looks ok'
 );
 
 for my $item ($splitm[0]->modes_as_objects) {

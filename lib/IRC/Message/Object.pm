@@ -1,6 +1,6 @@
 package IRC::Message::Object;
 {
-  $IRC::Message::Object::VERSION = '0.075000';
+  $IRC::Message::Object::VERSION = '0.080000';
 }
 
 use strictures 1;
@@ -85,7 +85,7 @@ has tags => (
     or confess "'tags =>' not a HASH: $_[0]"
   },
   predicate => 'has_tags',
-  default   => sub {  {}  },
+  default   => sub { +{} },
 );
 
 =pod
@@ -101,7 +101,8 @@ sub BUILDARGS {
   if (not defined $params{command}) {
     if (defined $params{raw_line}) {
       ## Try to create self from raw_line instead:
-      my $filt = $class->__build_filter($params{colonify});
+      my $filt = $params{filter} ?
+        $params{filter} : $class->__build_filter($params{colonify});
       my $refs = $filt->get( [$params{raw_line}] );
       %params = %{ $refs->[0] } if @$refs;
     } else {
@@ -178,8 +179,6 @@ sub truncate {
   (ref $self)->new(raw_line => $new)
 }
 
-
-
 no warnings 'void';
 q{
  <rnowak> fine, be rude like that
@@ -243,8 +242,8 @@ Shortcut for C<< IRC::Message::Object->new >>
 
 =head3 raw_line
 
-The raw IRC line. This will be generated via L<POE::Filter::IRCv3> if we
-weren't constructed with one.
+The raw IRC line. The line is generated via the current 
+L</filter> if the message object wasn't constructed with one.
 
 predicate: C<has_raw_line>
 

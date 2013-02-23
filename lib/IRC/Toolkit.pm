@@ -1,6 +1,6 @@
 package IRC::Toolkit;
 {
-  $IRC::Toolkit::VERSION = '0.075000';
+  $IRC::Toolkit::VERSION = '0.080000';
 }
 
 use Carp;
@@ -93,7 +93,7 @@ Jon Portnoy <avenj@cobaltirc.org>
 
 Portions of code are derived from L<IRC::Utils>, L<Net::IRC>, and
 L<POE::Filter::IRC::Compat>, which are copyright their respective authors;
-these items are documented where they are found, as well.
+these items are documented where they are found.
 
 Licensed under the same terms as Perl.
 

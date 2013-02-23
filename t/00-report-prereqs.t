@@ -17,6 +17,7 @@ my @modules = qw(
   Moo
   POE::Filter::IRCv3
   Scalar::Util
+  Storable
   Test::Exception
   Test::More
   overload
