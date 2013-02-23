@@ -25,7 +25,7 @@ isa_ok($short, 'IRC::Message::Object', 'ircmsg() produced obj' );
 cmp_ok( $short->command, 'eq', '001', 'ircmsg()->command()  ok' );
 
 my $tag_line = q{@intent=ACTION;znc.in/extension=value;foobar}
-            . qq{ PRIVMSG #somewhere :Some string};
+             . q{ PRIVMSG #somewhere :Some string};
 my $parsed = $filter->get([$tag_line])->[0];
 my $tagged = IRC::Message::Object->new(%$parsed);
 
@@ -64,5 +64,25 @@ my $from_raw = new_ok( 'IRC::Message::Object' => [
   ],
 );
 cmp_ok( $from_raw->command, 'eq', 'PRIVMSG', 'obj from raw_line  ok' );
+
+my $long_without_tags = q{PRIVMSG #somewhere :}.'X'x700;
+my $long_with_tags = $tag_line .'X'x700;
+
+my $orig_without_tags = ircmsg(raw_line => $long_without_tags);
+my $trunc_without_tags = $orig_without_tags->truncate;
+isa_ok( $trunc_without_tags, 'IRC::Message::Object', 
+  'truncate() returned obj'
+);
+cmp_ok( length $trunc_without_tags->raw_line, '==', 510,
+  'truncate() raw_line length ok'
+);
+cmp_ok( $trunc_without_tags->command, 'eq', 'PRIVMSG',
+  'truncate() command ok'
+);
+
+my $orig_with_tags  = ircmsg(raw_line => $long_with_tags);
+my $trunc_with_tags = $orig_with_tags->truncate;
+ok( $trunc_with_tags->has_tag('foobar'), 'has_tag after truncate ok' );
+
 
 done_testing;

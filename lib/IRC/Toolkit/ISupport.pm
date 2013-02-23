@@ -1,6 +1,6 @@
 package IRC::Toolkit::ISupport;
 {
-  $IRC::Toolkit::ISupport::VERSION = '0.074000';
+  $IRC::Toolkit::ISupport::VERSION = '0.075000';
 }
 use 5.10.1;
 use Carp 'confess';
@@ -245,9 +245,9 @@ sub parse_isupport {
   sub AUTOLOAD {
     my ($self, $val) = @_;
     my $subname = (split /::/, $AUTOLOAD)[-1];
-    return if index($subname, 'DESTROY') == 0;
     $self->{$subname}
   }
+  sub DESTROY {}
 
 }
 

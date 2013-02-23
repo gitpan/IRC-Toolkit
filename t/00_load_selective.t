@@ -10,4 +10,10 @@ can_ok( 'main', $_ ) for
   ## Modes
   qw/ mode_to_array mode_to_hash /,
 ;
+
+ok( !main->can($_), "did not import $_" ) for qw/
+  uc_irc eq_irc
+  irc_ref_to_line irc_line_to_ref
+/;
+
 done_testing;

@@ -1,6 +1,6 @@
 package IRC::Message::Object;
 {
-  $IRC::Message::Object::VERSION = '0.074000';
+  $IRC::Message::Object::VERSION = '0.075000';
 }
 
 use strictures 1;
@@ -16,36 +16,41 @@ sub ircmsg {
   __PACKAGE__->new(@_)
 }
 
-=pod
 
-=for Pod::Coverage truncate
+has colonify => (
+  is        => 'ro',
+  lazy      => 1,
+  default   => sub { 1 },
+);
 
-=cut
-sub truncate {
-  my ($self) = @_;
-
-  ## FIXME truncate raw_line to 512 *with* \r\n
-  ##  but *not* including message tags
-  ##  (and trailing space after them)
-  ##  per http://ircv3.atheme.org/specification/message-tags-3.2
-  ## try to preserve ctcp quoting if exists
-  ## return new Event
-}
-
-has 'command' => (
+has command => (
   required  => 1,
   is        => 'ro',
   predicate => 'has_command',
 );
 
-has 'prefix' => (
+
+has filter => (
+  is       => 'rw',
+  lazy     => 1,
+  builder  => '__build_filter',
+);
+
+sub __build_filter {
+  my ($cls, $colonify) = @_;
+  $colonify = 1 if not defined $colonify;
+  POE::Filter::IRCv3->new(colonify => $colonify)
+}
+
+
+has prefix => (
   is        => 'ro',
   lazy      => 1,
   predicate => 'has_prefix',
   default   => sub { '' },
 );
 
-has 'params' => (
+has params => (
   is        => 'ro',
   lazy      => 1,
   isa       => sub {
@@ -56,7 +61,7 @@ has 'params' => (
   default   => sub { [] },
 );
 
-has 'raw_line' => (
+has raw_line => (
   is        => 'ro',
   lazy      => 1,
   predicate => 'has_raw_line',
@@ -67,12 +72,12 @@ has 'raw_line' => (
       my $pred = "has_".$key;
       $hash{$key} = $self->$key if $self->$pred;
     }
-    my $lines = $self->__filter->put( [ \%hash ] );
+    my $lines = $self->filter->put( [ \%hash ] );
     $lines->[0]
   },
 );
 
-has 'tags' => (
+has tags => (
   is        => 'ro',
   lazy      => 1,
   isa       => sub {
@@ -96,7 +101,7 @@ sub BUILDARGS {
   if (not defined $params{command}) {
     if (defined $params{raw_line}) {
       ## Try to create self from raw_line instead:
-      my $filt = $class->__build_filter;
+      my $filt = $class->__build_filter($params{colonify});
       my $refs = $filt->get( [$params{raw_line}] );
       %params = %{ $refs->[0] } if @$refs;
     } else {
@@ -151,18 +156,29 @@ sub tags_as_string {
   $str
 }
 
-
-has '__filter' => (
-  is       => 'rw',
-  init_arg => 'filter',
-  lazy     => 1,
-  builder  => '__build_filter',
-);
-
-sub __build_filter {
+sub truncate {
   my ($self) = @_;
-  POE::Filter::IRCv3->new(colonify => 1)
+
+  my $new;
+  my $current = $self->raw_line;
+  my $len = length $current;
+
+  ## TODO check for CTCP first
+  ##  if so, set flag, consider and readd trailing \001 ?
+
+  if ($self->has_tags) {
+    my $tagstr = '@' . $self->tags_as_string;
+    my $trunc  = substr $current, (length($tagstr) + 1), 510;
+    $new = join ' ', $tagstr, $trunc;
+  } else {
+    ## No tags, truncate to 510
+    $new = length $current <= 510 ? $current : substr $current, 0, 510 ;
+  }
+
+  (ref $self)->new(raw_line => $new)
 }
+
+
 
 no warnings 'void';
 q{
@@ -223,7 +239,14 @@ Create a new B<IRC::Message::Object>
 
 Shortcut for C<< IRC::Message::Object->new >>
 
-=head2 Methods
+=head2 Attributes and Methods
+
+=head3 raw_line
+
+The raw IRC line. This will be generated via L<POE::Filter::IRCv3> if we
+weren't constructed with one.
+
+predicate: C<has_raw_line>
 
 =head3 command
 
@@ -248,16 +271,23 @@ The origin prefix.
 
 predicate: C<has_prefix>
 
-=head3 raw_line
+=head3 colonify
 
-The raw IRC line. This will be generated via L<POE::Filter::IRCv3> if we
-weren't constructed with one.
+Set to a boolean false value at construction time to instruct
+L<POE::Filter::IRCv3> not to always prefix the last argument with a colon.
 
-predicate: C<has_raw_line>
+Defaults to true.
+
+=head3 filter
+
+Can be used to change the L<POE::Filter> used to transform a raw line into a
+HASH and vice-versa.
+
+Defaults to a L<POE::Filter::IRCv3> instance.
 
 =head3 get_tag
 
-Retrieve a specific tag.
+Retrieve a specific IRCv3.2 message tag's value.
 
 This only works for tags with a defined value; see L</has_tag> to discover if
 a tag exists.
@@ -267,6 +297,10 @@ a tag exists.
 Takes a tag identifier; returns true if the tag exists.
 
 This is useful for finding out about tags that have no defined value.
+
+=head3 has_tags
+
+Returns true if there are tags present.
 
 =head3 tags
 
@@ -279,6 +313,11 @@ IRCv3.2 message tags, as an ARRAY of tags in the form of 'key=value'
 =head3 tags_as_string
 
 IRCv3.2 message tags as a specification-compliant string.
+
+=head3 truncate
+
+Truncates the raw line to 510 characters, excluding message tags (per the
+specification), and returns a new L<IRC::Message::Object>.
 
 =head1 AUTHOR
 

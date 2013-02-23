@@ -1,5 +1,9 @@
 # Changes for IRC::Toolkit
 
+0.075000  (23 Feb 2013)
+  Add IRC::Message::Object->truncate
+  Expose ->filter and ->colonify attribs
+
 0.074000  (22 Feb 2013)
   Add IRC::Toolkit::Modes::array_to_mode()
 
