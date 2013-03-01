@@ -1,6 +1,6 @@
 package IRC::Message::Object;
 {
-  $IRC::Message::Object::VERSION = '0.080000';
+  $IRC::Message::Object::VERSION = '0.081000';
 }
 
 use strictures 1;
@@ -19,7 +19,6 @@ sub ircmsg {
 
 has colonify => (
   is        => 'ro',
-  lazy      => 1,
   default   => sub { 1 },
 );
 

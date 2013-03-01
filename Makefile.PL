@@ -32,9 +32,9 @@ my %WriteMakefileArgs = (
     "overload" => 0,
     "strictures" => 1
   },
-  "VERSION" => "0.080000",
+  "VERSION" => "0.081000",
   "test" => {
-    "TESTS" => "t/*.t t/02_util/*.t"
+    "TESTS" => "t/*.t t/02_util/*.t t/05_role/*.t"
   }
 );
 

@@ -47,8 +47,12 @@ my $from_array = new_ok( $class =>
     mode_array => $array,
   ],
 );
-cmp_ok( $from_array->mode_string, 'eq', '+o-o+v avenj Joah Gilded',
+my $this_mstr = $from_array->mode_string;
+cmp_ok( $this_mstr, 'eq', '+o-o+v avenj Joah Gilded',
   'mode_string looks ok'
+);
+cmp_ok( $from_array->as_string, 'eq', $this_mstr,
+  'as_string alias ok'
 );
 
 my $long = new_ok( $class =>

@@ -1,15 +1,18 @@
 package IRC::Toolkit;
 {
-  $IRC::Toolkit::VERSION = '0.080000';
+  $IRC::Toolkit::VERSION = '0.081000';
 }
 
 use Carp;
 use strictures 1;
 
+## Core bits can be added to this list ...
+## ... but removing modules will break stuff downstream
 my @modules = qw/
   Case
   Colors
   CTCP
+  ISupport
   Masks
   Modes
   Parser
@@ -44,7 +47,7 @@ IRC::Toolkit - Useful IRC objects and utilities
 =head1 SYNOPSIS
 
   ## Import the most commonly used Tookit:: modules
-  ##  (Case, Colors, CTCP, Masks, Modes, and Parser)
+  ##  (Case, Colors, CTCP, ISupport, Masks, Modes, Parser)
   use IRC::Toolkit;
 
   ## Import specific modules:
@@ -80,6 +83,9 @@ L<IRC::Toolkit::Modes>; Mode-line parsing tools
 L<IRC::Toolkit::Parser>; Functional interface to L<POE::Filter::IRCv3>
 
 L<IRC::Toolkit::TS6>; Produce TS6 IDs
+
+L<IRC::Toolkit::Role::CaseMap>; A Role for classes that track IRC casemapping
+settings
 
 =head1 SEE ALSO
 

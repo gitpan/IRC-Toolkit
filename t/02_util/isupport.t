@@ -69,6 +69,10 @@ is_deeply( $isup->chanmodes->bool,
   [ split '', 'cimnpstCMRS' ],
   'chanmodes->bool() ok'
 );
+cmp_ok( $isup->chanmodes->as_string, 'eq',
+  'eIqdb,k,l,cimnpstCMRS',
+  'chanmodes->as_string() ok'
+);
 
 # chantypes()
 is_deeply( $isup->chantypes,
@@ -95,6 +99,9 @@ cmp_ok( $isup->extban->prefix, 'eq', '$', 'extban->prefix() ok' );
 is_deeply( $isup->extban->flags,
   [ split '', 'gnp' ],
   'extban->flags() ok'
+);
+cmp_ok( $isup->extban->as_string, 'eq', '$,gnp',
+  'extban->as_string() ok'
 );
 
 # maxlist()

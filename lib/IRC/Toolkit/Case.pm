@@ -1,6 +1,6 @@
 package IRC::Toolkit::Case;
 {
-  $IRC::Toolkit::Case::VERSION = '0.080000';
+  $IRC::Toolkit::Case::VERSION = '0.081000';
 }
 use strictures 1;
 

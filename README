@@ -3,7 +3,7 @@ NAME
 
 SYNOPSIS
       ## Import the most commonly used Tookit:: modules
-      ##  (Case, Colors, CTCP, Masks, Modes, and Parser)
+      ##  (Case, Colors, CTCP, ISupport, Masks, Modes, Parser)
       use IRC::Toolkit;
 
       ## Import specific modules:
@@ -39,6 +39,9 @@ DESCRIPTION
     IRC::Toolkit::Parser; Functional interface to POE::Filter::IRCv3
 
     IRC::Toolkit::TS6; Produce TS6 IDs
+
+    IRC::Toolkit::Role::CaseMap; A Role for classes that track IRC
+    casemapping settings
 
 SEE ALSO
     IRC::Utils

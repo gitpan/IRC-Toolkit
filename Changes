@@ -1,5 +1,12 @@
 # Changes for IRC::Toolkit
 
+0.081000  (01 Mar 2013)
+  Add IRC::Toolkit::Role::CaseMap
+
+  Add ISupport->extban->as_string & ->chanmodes->as_string
+
+  Import parse_isupport() by default on 'use IRC::Toolkit'
+
 0.080000  (23 Feb 2013)
   Incompatible change:
    IRC::Mode::Set->new_from_params renamed ->clone_from_params

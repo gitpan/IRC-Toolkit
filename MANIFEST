@@ -18,6 +18,7 @@ lib/IRC/Toolkit/ISupport.pm
 lib/IRC/Toolkit/Masks.pm
 lib/IRC/Toolkit/Modes.pm
 lib/IRC/Toolkit/Parser.pm
+lib/IRC/Toolkit/Role/CaseMap.pm
 lib/IRC/Toolkit/TS6.pm
 t/00-report-prereqs.t
 t/00_load.t
@@ -33,5 +34,6 @@ t/02_util/parser.t
 t/02_util/ts6.t
 t/03_irc_mode.t
 t/04_irc_modechange.t
+t/05_role/casemap.t
 t/release-pod-coverage.t
 t/release-pod-syntax.t
