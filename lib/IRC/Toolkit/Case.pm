@@ -1,6 +1,6 @@
 package IRC::Toolkit::Case;
 {
-  $IRC::Toolkit::Case::VERSION = '0.081000';
+  $IRC::Toolkit::Case::VERSION = '0.081001';
 }
 use strictures 1;
 
@@ -91,6 +91,9 @@ C<strict-rfc1459>, or C<ascii>:
   'ascii'           a-z      -->  A-Z
   'rfc1459'         a-z{}|^  -->  A-Z[]\~   (default)
   'strict-rfc1459'  a-z{}|   -->  A-Z[]\
+
+If you're building a class that tracks an IRC casemapping and manipulates
+strings accordingly, you may also want to see L<IRC::Toolkit::Role::CaseMap>.
 
 =head2 lc_irc
 

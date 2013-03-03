@@ -1,6 +1,6 @@
 package IRC::Toolkit::Parser;
 {
-  $IRC::Toolkit::Parser::VERSION = '0.081000';
+  $IRC::Toolkit::Parser::VERSION = '0.081001';
 }
 
 use Carp;

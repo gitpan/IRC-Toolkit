@@ -29,10 +29,11 @@ my %WriteMakefileArgs = (
     "POE::Filter::IRCv3" => 0,
     "Scalar::Util" => 0,
     "Storable" => 0,
+    "namespace::clean" => 0,
     "overload" => 0,
     "strictures" => 1
   },
-  "VERSION" => "0.081000",
+  "VERSION" => "0.081001",
   "test" => {
     "TESTS" => "t/*.t t/02_util/*.t t/05_role/*.t"
   }

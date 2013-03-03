@@ -1,5 +1,8 @@
 # Changes for IRC::Toolkit
 
+0.081001  (03 Mar 2013)
+  Missing dependency on namespace::clean
+
 0.081000  (01 Mar 2013)
   Add IRC::Toolkit::Role::CaseMap
 

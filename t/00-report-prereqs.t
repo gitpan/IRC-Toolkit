@@ -20,6 +20,7 @@ my @modules = qw(
   Storable
   Test::Exception
   Test::More
+  namespace::clean
   overload
   perl
   strictures
