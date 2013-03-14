@@ -1,6 +1,6 @@
 package IRC::Toolkit::ISupport;
 {
-  $IRC::Toolkit::ISupport::VERSION = '0.081001';
+  $IRC::Toolkit::ISupport::VERSION = '0.082000';
 }
 use 5.10.1;
 use Carp 'confess';
@@ -9,6 +9,9 @@ use strictures 1;
 use Scalar::Util 'blessed';
 
 use IRC::Message::Object 'ircmsg';
+
+## FIXME convert all ref-type retvals to List::Objects
+use List::Objects::WithUtils;
 
 use Exporter 'import';
 our @EXPORT = 'parse_isupport';
@@ -260,7 +263,7 @@ sub parse_isupport {
   ## Everything else is bool / int / str we can't parse
   our $AUTOLOAD;
   sub AUTOLOAD {
-    my ($self, $val) = @_;
+    my ($self) = @_;
     my $subname = (split /::/, $AUTOLOAD)[-1];
     $self->{$subname}
   }
@@ -280,13 +283,18 @@ IRC::Toolkit::ISupport - IRC ISUPPORT parser
 =head1 SYNOPSIS
 
   use IRC::Toolkit::ISupport;
-  my $isupport = parse_isupport(@lines);
+  my $isupport = parse_isupport(@raw_lines);
 
   ## Get the MODES= value
   my $maxmodes = $isupport->modes;
 
   ## Get the PREFIX= char for mode 'o'
   my $prefix_for_o = $isupport->prefix('o');
+
+  ## Find out if we have WHOX support
+  if ( $isupport->whox ) {
+    ... 
+  }
 
   ## ... etc ...
 

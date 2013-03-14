@@ -14,7 +14,10 @@ use strict; use warnings FATAL => 'all';
 
 }
 
+
 my $o = testing::Role::CaseMap->new;
+can_ok( $o, $_ ) for qw/ lower upper equal /;
+
 
 cmp_ok( $o->lower('ABCdef{}'), 'eq', 'abcdef{}',
   'lower() ok'

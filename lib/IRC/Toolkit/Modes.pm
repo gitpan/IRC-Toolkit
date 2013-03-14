@@ -1,6 +1,6 @@
 package IRC::Toolkit::Modes;
 {
-  $IRC::Toolkit::Modes::VERSION = '0.081001';
+  $IRC::Toolkit::Modes::VERSION = '0.082000';
 }
 use 5.10.1;
 use Carp;
@@ -130,6 +130,7 @@ IRC::Toolkit::Modes - IRC mode parsing utilities
 =head1 SYNOPSIS
 
   use IRC::Toolkit::Modes;
+  my $mode_string = '+o-o avenj Joah';
   my $array = mode_to_array( $mode_string );
   my $hash  = mode_to_hash( $mode_string );
 

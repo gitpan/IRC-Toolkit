@@ -25,15 +25,17 @@ my %WriteMakefileArgs = (
   "PREREQ_PM" => {
     "Carp" => 0,
     "Exporter" => 0,
+    "List::Objects::WithUtils" => 0,
     "Moo" => 1,
     "POE::Filter::IRCv3" => 0,
+    "Role::Tiny" => 0,
     "Scalar::Util" => 0,
     "Storable" => 0,
     "namespace::clean" => 0,
     "overload" => 0,
     "strictures" => 1
   },
-  "VERSION" => "0.081001",
+  "VERSION" => "0.082000",
   "test" => {
     "TESTS" => "t/*.t t/02_util/*.t t/05_role/*.t"
   }

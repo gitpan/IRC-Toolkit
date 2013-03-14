@@ -1,6 +1,6 @@
 package IRC::Toolkit::Role::CaseMap;
 {
-  $IRC::Toolkit::Role::CaseMap::VERSION = '0.081001';
+  $IRC::Toolkit::Role::CaseMap::VERSION = '0.082000';
 }
 use strictures 1;
 use Carp;
@@ -57,14 +57,16 @@ IRC::Toolkit::Role::CaseMap - Role for classes that track IRC casemapping
 
   with 'IRC::Toolkit::Role::CaseMap';
 
-  ## ...
-  my $lowered = $self->lower( $nickname );
-  my $uppered = $self->upper( $nickname );
+  sub mymeth {
+    my ($self, $nickname, $one, $two) = @_;
 
-  if ( $self->equal( $one, $two ) ) {
-    ...
+    my $lowered = $self->lower( $nickname );
+    my $uppered = $self->upper( $nickname );
+
+    if ( $self->equal( $one, $two ) ) {
+      ...
+    }
   }
-
 
 =head1 DESCRIPTION
 

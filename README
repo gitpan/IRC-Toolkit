@@ -11,6 +11,7 @@ SYNOPSIS
         CTCP
         Masks
         Modes
+        Numerics
       /;
 
 DESCRIPTION
@@ -35,6 +36,9 @@ DESCRIPTION
     IRC::Toolkit::Masks; Hostmask parsing and matching tools
 
     IRC::Toolkit::Modes; Mode-line parsing tools
+
+    IRC::Toolkit::Numerics; IRC numerics translation to/from RPL or ERR
+    names
 
     IRC::Toolkit::Parser; Functional interface to POE::Filter::IRCv3
 

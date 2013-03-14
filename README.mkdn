@@ -13,6 +13,7 @@ IRC::Toolkit - Useful IRC objects and utilities
       CTCP
       Masks
       Modes
+      Numerics
     /;
 
 # DESCRIPTION
@@ -37,6 +38,8 @@ documentation, below.
 [IRC::Toolkit::Masks](http://search.cpan.org/perldoc?IRC::Toolkit::Masks); Hostmask parsing and matching tools
 
 [IRC::Toolkit::Modes](http://search.cpan.org/perldoc?IRC::Toolkit::Modes); Mode-line parsing tools
+
+[IRC::Toolkit::Numerics](http://search.cpan.org/perldoc?IRC::Toolkit::Numerics); IRC numerics translation to/from RPL or ERR names
 
 [IRC::Toolkit::Parser](http://search.cpan.org/perldoc?IRC::Toolkit::Parser); Functional interface to [POE::Filter::IRCv3](http://search.cpan.org/perldoc?POE::Filter::IRCv3)
 

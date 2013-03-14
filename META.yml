@@ -19,8 +19,10 @@ recommends:
 requires:
   Carp: 0
   Exporter: 0
+  List::Objects::WithUtils: 0
   Moo: 1
   POE::Filter::IRCv3: 0
+  Role::Tiny: 0
   Scalar::Util: 0
   Storable: 0
   namespace::clean: 0
@@ -29,4 +31,4 @@ requires:
   strictures: 1
 resources:
   repository: git://github.com/avenj/irc-toolkit.git
-version: 0.081001
+version: 0.082000

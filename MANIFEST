@@ -6,6 +6,7 @@ META.yml
 Makefile.PL
 README
 README.mkdn
+TODO
 dist.ini
 lib/IRC/Message/Object.pm
 lib/IRC/Mode/Set.pm
@@ -17,6 +18,7 @@ lib/IRC/Toolkit/Colors.pm
 lib/IRC/Toolkit/ISupport.pm
 lib/IRC/Toolkit/Masks.pm
 lib/IRC/Toolkit/Modes.pm
+lib/IRC/Toolkit/Numerics.pm
 lib/IRC/Toolkit/Parser.pm
 lib/IRC/Toolkit/Role/CaseMap.pm
 lib/IRC/Toolkit/TS6.pm
@@ -30,10 +32,14 @@ t/02_util/ctcp.t
 t/02_util/isupport.t
 t/02_util/mask.t
 t/02_util/modes.t
+t/02_util/numerics.t
 t/02_util/parser.t
 t/02_util/ts6.t
 t/03_irc_mode.t
 t/04_irc_modechange.t
 t/05_role/casemap.t
+t/release-no-tabs.t
 t/release-pod-coverage.t
+t/release-pod-linkcheck.t
 t/release-pod-syntax.t
+t/release-unused-vars.t

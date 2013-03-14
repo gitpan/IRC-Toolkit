@@ -1,6 +1,6 @@
 package IRC::Message::Object;
 {
-  $IRC::Message::Object::VERSION = '0.081001';
+  $IRC::Message::Object::VERSION = '0.082000';
 }
 
 use strictures 1;
@@ -36,8 +36,7 @@ has filter => (
 );
 
 sub __build_filter {
-  my ($cls, $colonify) = @_;
-  $colonify = 1 if not defined $colonify;
+  my $colonify = defined $_[1] ? $_[1] : 1;
   POE::Filter::IRCv3->new(colonify => $colonify)
 }
 
@@ -161,7 +160,6 @@ sub truncate {
 
   my $new;
   my $current = $self->raw_line;
-  my $len = length $current;
 
   ## TODO check for CTCP first
   ##  if so, set flag, consider and readd trailing \001 ?
@@ -209,12 +207,12 @@ IRC::Message::Object - Incoming or outgoing IRC events
   );
 
   ## ... or take a raw IRC line (and parse it):
-  my $event = ircmsg(
+  $event = ircmsg(
     raw_line => ':some.server.org 001 user :Welcome to IRC'
   );
 
   ## ... or feed from POE::Filter::IRCD or POE::Filter::IRCv3:
-  my $event = ircmsg( %$ref_from_filter );
+  $event = ircmsg( %$ref_from_filter );
 
   ## ... retrieve useful bits later (see Methods):
   my $cmd  = $event->command;

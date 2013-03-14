@@ -1,9 +1,17 @@
 # Changes for IRC::Toolkit
 
+0.082000  (14 Mar 2013)
+
+  Add IRC::Toolkit::Numerics
+
+  Documentation fixes
+
 0.081001  (03 Mar 2013)
+
   Missing dependency on namespace::clean
 
 0.081000  (01 Mar 2013)
+
   Add IRC::Toolkit::Role::CaseMap
 
   Add ISupport->extban->as_string & ->chanmodes->as_string
@@ -11,6 +19,7 @@
   Import parse_isupport() by default on 'use IRC::Toolkit'
 
 0.080000  (23 Feb 2013)
+
   Incompatible change:
    IRC::Mode::Set->new_from_params renamed ->clone_from_params
    IRC::Mode::Set->new_from_mode   renamed ->clone_from_mode
@@ -21,36 +30,45 @@
    Fix filter + raw_line combination at construction-time
 
 0.075000  (23 Feb 2013)
+
   Add IRC::Message::Object->truncate
   Expose ->filter and ->colonify attribs
 
 0.074000  (22 Feb 2013)
+
   Add IRC::Toolkit::Modes::array_to_mode()
 
   Document ISUPPORT EXTBAN parser
 
 0.073000  (22 Feb 2013)
+
   Add ELIST, EXTBAN, and TARGMAX support to ISupport parser
 
 0.072000  (22 Feb 2013)
+
   Add IRC::Toolkit::ISupport
 
 0.071001  (21 Feb 2013)
+
   Fix 'use IRC::Toolkit qw/ ... /' imports
 
   Documentation fixes
 
 0.071000  (10 Feb 2013)
+
   Add IRC::Toolkit::TS6 ID generator
 
 0.070003  (09 Feb 2013)
+
   Missing dependency on namespace::clean
    (drop it from Mode::Set)
 
 0.070002  (09 Feb 2013)
+
   Documentation updates
 
 0.070001  (09 Feb 2013)
+
   Add IRC::Mode::Single, IRC::Mode::Set objects
    (extracted from IRC::Server::Pluggable)
 

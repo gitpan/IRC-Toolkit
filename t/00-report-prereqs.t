@@ -14,8 +14,10 @@ my @modules = qw(
   Class::XSAccessor
   Exporter
   ExtUtils::MakeMaker
+  List::Objects::WithUtils
   Moo
   POE::Filter::IRCv3
+  Role::Tiny
   Scalar::Util
   Storable
   Test::Exception
