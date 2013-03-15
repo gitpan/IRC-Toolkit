@@ -1,6 +1,6 @@
 package IRC::Mode::Set;
 {
-  $IRC::Mode::Set::VERSION = '0.082000';
+  $IRC::Mode::Set::VERSION = '0.083000';
 }
 
 use 5.10.1;

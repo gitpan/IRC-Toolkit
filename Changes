@@ -1,5 +1,9 @@
 # Changes for IRC::Toolkit
 
+0.083000  (14 Mar 2013)
+
+  Add OO interface to IRC::Toolkit::Numerics
+
 0.082000  (14 Mar 2013)
 
   Add IRC::Toolkit::Numerics

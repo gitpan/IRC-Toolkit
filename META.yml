@@ -14,8 +14,6 @@ meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
 name: IRC-Toolkit
-recommends:
-  Class::XSAccessor: 1
 requires:
   Carp: 0
   Exporter: 0
@@ -31,4 +29,4 @@ requires:
   strictures: 1
 resources:
   repository: git://github.com/avenj/irc-toolkit.git
-version: 0.082000
+version: 0.083000

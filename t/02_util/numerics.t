@@ -5,6 +5,8 @@ BEGIN {
   use_ok( 'IRC::Toolkit::Numerics' );
 }
 
+# Functional:
+
 ok( main->can('name_from_numeric'), 'name_from_numeric imported' );
 ok( main->can('numeric_from_name'), 'numeric_from_name imported' );
 
@@ -28,5 +30,50 @@ cmp_ok( $numshash->keys->count, '==', $nameshash->keys->count,
   }
   BAIL_OUT("Failed")
 };
+
+
+## OO:
+my $nobj = new_ok( 'IRC::Toolkit::Numerics' );
+
+cmp_ok( $nobj->get_name_for(471), 'eq', 'ERR_CHANNELISFULL',
+  'get_name_for() ok'
+);
+
+# Should also work as a class method:
+cmp_ok( IRC::Toolkit::Numerics->get_name_for(471), 'eq', 'ERR_CHANNELISFULL',
+  'get_name_for() as class method ok'
+);
+
+cmp_ok( $nobj->get_numeric_for('ERR_CHANNELISFULL'), '==', 471,
+  'get_numeric_for() ok'
+);
+
+cmp_ok( IRC::Toolkit::Numerics->get_numeric_for('ERR_CHANNELISFULL'),
+  '==', 471,
+  'get_numeric_for() as class method ok'
+);
+
+cmp_ok( $nobj->get_name_for(484), 'ne', 'ERR_RESTRICTED',
+  'pre-override check ok'
+);
+$nobj->associate_numeric( '484' => 'ERR_RESTRICTED' );
+cmp_ok( $nobj->get_name_for(484), 'eq', 'ERR_RESTRICTED',
+  'override get_name_for ok'
+);
+cmp_ok( $nobj->get_numeric_for('ERR_RESTRICTED'), '==', 484,
+  'override get_numeric_for ok'
+);
+
+undef $numshash;
+undef $nameshash;
+$numshash = $nobj->export;
+$nameshash = $nobj->export_by_name;
+
+cmp_ok( $numshash->get('484'), 'eq', 'ERR_RESTRICTED',
+  'override export() ok'
+);
+cmp_ok( $nameshash->get('ERR_RESTRICTED'), '==', 484,
+  'override export_by_name ok'
+);
 
 done_testing;
