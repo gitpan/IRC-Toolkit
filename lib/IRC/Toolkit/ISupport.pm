@@ -1,6 +1,6 @@
 package IRC::Toolkit::ISupport;
 {
-  $IRC::Toolkit::ISupport::VERSION = '0.083000';
+  $IRC::Toolkit::ISupport::VERSION = '0.084000';
 }
 use 5.10.1;
 use Carp 'confess';
@@ -10,7 +10,6 @@ use Scalar::Util 'blessed';
 
 use IRC::Message::Object 'ircmsg';
 
-## FIXME convert all ref-type retvals to List::Objects
 use List::Objects::WithUtils;
 
 use Exporter 'import';
@@ -40,10 +39,10 @@ my $parse = +{
     my ($val) = @_;
     my ($list, $always, $whenset, $bool) = split /,/, $val;
     +{
-      list    => [ split '', ( $list    // '' ) ],
-      always  => [ split '', ( $always  // '' ) ],
-      whenset => [ split '', ( $whenset // '' ) ],
-      bool    => [ split '', ( $bool    // '' ) ],
+      list    => array( split '', ( $list    // '' ) ),
+      always  => array( split '', ( $always  // '' ) ),
+      whenset => array( split '', ( $whenset // '' ) ),
+      bool    => array( split '', ( $bool    // '' ) ),
     }
   },
 
@@ -56,7 +55,7 @@ my $parse = +{
     my ($prefix, $flags) = split /,/, $val;
     +{ 
       prefix => $prefix, 
-      flags  => [ split '', ( $flags // '' ) ] 
+      flags  => array( split '', ( $flags // '' ) ),
     }
   },
 
@@ -332,10 +331,13 @@ when they are set, and boolean-type 'flag' modes, respectively:
 
   CHANMODES=LIST,ALWAYS,WHENSET,BOOL
 
-You can retrieve ARRAYs containing lists of modes belonging to each set:
+You can retrieve L<List::Objects::WithUtils::Array> ARRAY-type objects 
+containing lists of modes belonging to each set:
 
   my @listmodes = @{ $isupport->chanmodes->list };
-  my $always  = $isupport->chanmodes->always;
+
+  my @always  = $isupport->chanmodes->always->all;
+
   my $whenset = $isupport->chanmodes->whenset;
   my $boolean = $isupport->chanmodes->bool;
 
@@ -364,7 +366,12 @@ Returns an object with the following methods:
 
 B<prefix> returns the extended ban prefix character.
 
-B<flags> returns the supported extended ban flags as an ARRAY of flags.
+B<flags> returns the supported extended ban flags as an
+L<List::Objects::WithUtils::Array> of flags:
+
+  if ($isupp->extban->flags->grep(sub { $_[0] eq 'a' })->has_any) {
+    ...
+  }
 
 B<as_string> returns the string representation of the EXTBAN= declaration.
 

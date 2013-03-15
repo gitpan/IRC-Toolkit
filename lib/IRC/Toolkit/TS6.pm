@@ -1,6 +1,6 @@
 package IRC::Toolkit::TS6;
 {
-  $IRC::Toolkit::TS6::VERSION = '0.083000';
+  $IRC::Toolkit::TS6::VERSION = '0.084000';
 }
 use strictures 1;
 use Carp;

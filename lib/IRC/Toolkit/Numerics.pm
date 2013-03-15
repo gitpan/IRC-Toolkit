@@ -1,6 +1,6 @@
 package IRC::Toolkit::Numerics;
 {
-  $IRC::Toolkit::Numerics::VERSION = '0.083000';
+  $IRC::Toolkit::Numerics::VERSION = '0.084000';
 }
 use strictures 1;
 use Carp 'confess';
@@ -24,7 +24,7 @@ our %Numeric = (
    '005' => 'RPL_ISUPPORT',          # draft-brocklesby-irc-isupport-03
    '008' => 'RPL_SNOMASK',           # ircu
    '009' => 'RPL_STATMEMTOT',        # ircu
-   '010' => 'RPL_STATMEM',           # ircu
+   '010' => 'RPL_REDIR',             # ratbox
    '014' => 'RPL_YOURCOOKIE',        # IRCnet
    '015' => 'RPL_MAP',               # ircu
    '016' => 'RPL_MAPMORE',           # ircu

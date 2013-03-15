@@ -1,5 +1,11 @@
 # Changes for IRC::Toolkit
 
+0.084000  (15 Mar 2013)
+
+  ISupport array-type retvals are now List::Objects::WithUtils::Arrays
+
+  Prefer ratbox label for numeric '010'
+
 0.083000  (14 Mar 2013)
 
   Add OO interface to IRC::Toolkit::Numerics

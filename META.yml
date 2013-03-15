@@ -29,4 +29,4 @@ requires:
   strictures: 1
 resources:
   repository: git://github.com/avenj/irc-toolkit.git
-version: 0.083000
+version: 0.084000

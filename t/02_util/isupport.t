@@ -53,6 +53,7 @@ is_deeply( $isup->chanmodes,
   },
   'chanmodes() HASH ok'
 );
+isa_ok( $isup->chanmodes->list, 'List::Objects::WithUtils::Array' );
 is_deeply( $isup->chanmodes->list,
   [ split '', 'eIqdb' ],
   'chanmodes->list() ok'
@@ -96,6 +97,7 @@ is_deeply( $isup->extban,
   'extban() HASH ok'
 );
 cmp_ok( $isup->extban->prefix, 'eq', '$', 'extban->prefix() ok' );
+isa_ok( $isup->extban->flags, 'List::Objects::WithUtils::Array' );
 is_deeply( $isup->extban->flags,
   [ split '', 'gnp' ],
   'extban->flags() ok'
