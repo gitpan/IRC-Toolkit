@@ -1,6 +1,6 @@
 package IRC::Toolkit;
 {
-  $IRC::Toolkit::VERSION = '0.084000';
+  $IRC::Toolkit::VERSION = '0.084001';
 }
 
 use Carp;
@@ -24,8 +24,8 @@ sub import {
   my $pkg = caller;
   my @failed;
   for my $mod (@load) {
-    my $c = "package $pkg; use IRC::Toolkit::$mod";
-    eval $c;
+    my $ld = "package $pkg; use IRC::Toolkit::$mod";
+    eval $ld;
     if ($@) {
       warn $@;
       push @failed, $mod
@@ -57,6 +57,9 @@ IRC::Toolkit - Useful IRC objects and utilities
     Modes
     Numerics
   /;
+
+  ## ... or individually:
+  use IRC::Toolkit::Numerics;
 
 =head1 DESCRIPTION
 

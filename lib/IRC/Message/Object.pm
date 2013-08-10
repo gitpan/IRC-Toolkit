@@ -1,6 +1,6 @@
 package IRC::Message::Object;
 {
-  $IRC::Message::Object::VERSION = '0.084000';
+  $IRC::Message::Object::VERSION = '0.084001';
 }
 
 use strictures 1;
@@ -96,7 +96,7 @@ sub BUILDARGS {
   my $class = shift;
   my %params = @_ > 1 ? @_ : (raw_line => $_[0]) ;
 
-  if (not defined $params{command}) {
+  if (! defined $params{command}) {
     if (defined $params{raw_line}) {
       ## Try to create self from raw_line instead:
       my $filt = $params{filter} ?
@@ -176,12 +176,11 @@ sub truncate {
   (ref $self)->new(raw_line => $new)
 }
 
-no warnings 'void';
-q{
- <rnowak> fine, be rude like that
- <Perihelion> SORRY I WAS DISCUSSING THE ABILITY TO PUT
-  AN IRCD ON A ROOMBA
-};
+print
+  qq[<rnowak> fine, be rude like that\n],
+  qq[<Perihelion> SORRY I WAS DISCUSSING THE ABILITY TO],
+  qq[ PUT AN IRCD ON A ROOMBA\n]
+unless caller; 1;
 
 =pod
 

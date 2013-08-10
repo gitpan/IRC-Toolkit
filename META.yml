@@ -8,7 +8,7 @@ build_requires:
 configure_requires:
   ExtUtils::MakeMaker: 6.30
 dynamic_config: 0
-generated_by: 'Dist::Zilla version 4.300030, CPAN::Meta::Converter version 2.120921'
+generated_by: 'Dist::Zilla version 4.300035, CPAN::Meta::Converter version 2.120921'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -17,9 +17,9 @@ name: IRC-Toolkit
 requires:
   Carp: 0
   Exporter: 0
-  List::Objects::WithUtils: 0
+  List::Objects::WithUtils: 1.009
   Moo: 1
-  POE::Filter::IRCv3: 0
+  POE::Filter::IRCv3: 0.045
   Role::Tiny: 0
   Scalar::Util: 0
   Storable: 0
@@ -29,4 +29,4 @@ requires:
   strictures: 1
 resources:
   repository: git://github.com/avenj/irc-toolkit.git
-version: 0.084000
+version: 0.084001

@@ -1,8 +1,8 @@
 package IRC::Toolkit::Modes;
 {
-  $IRC::Toolkit::Modes::VERSION = '0.084000';
+  $IRC::Toolkit::Modes::VERSION = '0.084001';
 }
-use 5.10.1;
+
 use Carp;
 use strictures 1;
 
@@ -49,12 +49,14 @@ sub mode_to_array {
   ## Returns ARRAY-of-ARRAY like:
   ##  [  [ '+', 'o', 'some_nick' ], [ '-', 't' ] ]
 
-  my $modestr = shift // confess "mode_to_array() called without mode string";
+  my $modestr = shift;
+  confess "mode_to_array() called without mode string"
+    unless defined $modestr;
 
   my %args = @_;
-  $args{param_always} //= [ split //, 'bkohv' ];
-  $args{param_set}    //= ( $args{param_on_set} // [ 'l' ] );
-  $args{params}       //= [ ];
+  $args{param_always} ||= [ split //, 'bkohv' ];
+  $args{param_set}    ||= ( $args{param_on_set} || [ 'l' ] );
+  $args{params}       ||= [ ];
 
   if ( index($modestr, ' ') > -1 ) {
     my @params;

@@ -6,7 +6,6 @@ META.yml
 Makefile.PL
 README
 README.mkdn
-TODO
 dist.ini
 lib/IRC/Message/Object.pm
 lib/IRC/Mode/Set.pm
@@ -38,6 +37,7 @@ t/02_util/ts6.t
 t/03_irc_mode.t
 t/04_irc_modechange.t
 t/05_role/casemap.t
+t/release-cpan-changes.t
 t/release-no-tabs.t
 t/release-pod-coverage.t
 t/release-pod-linkcheck.t

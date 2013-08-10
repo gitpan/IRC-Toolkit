@@ -1,6 +1,6 @@
 package IRC::Toolkit::Case;
 {
-  $IRC::Toolkit::Case::VERSION = '0.084000';
+  $IRC::Toolkit::Case::VERSION = '0.084001';
 }
 use strictures 1;
 
@@ -11,9 +11,12 @@ our @EXPORT = qw/
   eq_irc
 /;
 
+## The prototypes are unfortunate, but I pulled these out of an old
+## and very large bot project ... and was too scared to remove them.
+
 sub lc_irc ($;$) {
   my ($string, $casemap) = @_;
-  $casemap = lc( $casemap // 'rfc1459' );
+  $casemap = lc( $casemap || 'rfc1459' );
 
   CASE: {
     if ($casemap eq 'strict-rfc1459') {
@@ -34,7 +37,7 @@ sub lc_irc ($;$) {
 
 sub uc_irc ($;$) {
   my ($string, $casemap) = @_;
-  $casemap = lc( $casemap // 'rfc1459' );
+  $casemap = lc( $casemap || 'rfc1459' );
 
   CASE: {
     if ($casemap eq 'strict-rfc1459') {

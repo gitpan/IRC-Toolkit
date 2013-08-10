@@ -1,111 +1,122 @@
 # Changes for IRC::Toolkit
 
-0.084000  (15 Mar 2013)
+0.084001 2013-08-10
 
-  ISupport array-type retvals are now List::Objects::WithUtils::Arrays
+  - Minor cleanups & optimizations
 
-  Prefer ratbox label for numeric '010'
+  - Fix 'Changes' to be in line with CPAN::Changes::Spec
 
-0.083000  (14 Mar 2013)
+0.084000 2013-03-15
 
-  Add OO interface to IRC::Toolkit::Numerics
+  - ISupport array-type retvals are now List::Objects::WithUtils::Arrays
 
-0.082000  (14 Mar 2013)
+  - Prefer ratbox label for numeric '010'
 
-  Add IRC::Toolkit::Numerics
+0.083000 2013-03-14
 
-  Documentation fixes
+  - Add OO interface to IRC::Toolkit::Numerics
 
-0.081001  (03 Mar 2013)
+0.082000 2013-03-14
 
-  Missing dependency on namespace::clean
+  - Add IRC::Toolkit::Numerics
 
-0.081000  (01 Mar 2013)
+  - Documentation fixes
 
-  Add IRC::Toolkit::Role::CaseMap
+0.081001 2013-03-03
 
-  Add ISupport->extban->as_string & ->chanmodes->as_string
+  - Missing dependency on namespace::clean
 
-  Import parse_isupport() by default on 'use IRC::Toolkit'
+0.081000 2013-03-01
 
-0.080000  (23 Feb 2013)
+  - Add IRC::Toolkit::Role::CaseMap
 
-  Incompatible change:
-   IRC::Mode::Set->new_from_params renamed ->clone_from_params
-   IRC::Mode::Set->new_from_mode   renamed ->clone_from_mode
+  - Add ISupport->extban->as_string & ->chanmodes->as_string
 
-  Add IRC::Mode::Set->clone() and ->export()
+  - Import parse_isupport() by default on 'use IRC::Toolkit'
 
-  IRC::Message::Object;
-   Fix filter + raw_line combination at construction-time
+0.080000 2013-02-23
 
-0.075000  (23 Feb 2013)
+  - Incompatible change:
+    IRC::Mode::Set->new_from_params renamed ->clone_from_params
+    IRC::Mode::Set->new_from_mode   renamed ->clone_from_mode
 
-  Add IRC::Message::Object->truncate
-  Expose ->filter and ->colonify attribs
+  - Add IRC::Mode::Set->clone() and ->export()
 
-0.074000  (22 Feb 2013)
+  - IRC::Message::Object;
+    Fix filter + raw_line combination at construction-time
 
-  Add IRC::Toolkit::Modes::array_to_mode()
+0.075000 2013-02-23
 
-  Document ISUPPORT EXTBAN parser
+  - Add IRC::Message::Object->truncate
+  
+  - Expose ->filter and ->colonify attribs
 
-0.073000  (22 Feb 2013)
+0.074000 2013-02-22
 
-  Add ELIST, EXTBAN, and TARGMAX support to ISupport parser
+  - Add IRC::Toolkit::Modes::array_to_mode()
 
-0.072000  (22 Feb 2013)
+  - Document ISUPPORT EXTBAN parser
 
-  Add IRC::Toolkit::ISupport
+0.073000 2013-02-22
 
-0.071001  (21 Feb 2013)
+  - Add ELIST, EXTBAN, and TARGMAX support to ISupport parser
 
-  Fix 'use IRC::Toolkit qw/ ... /' imports
+0.072000 2013-02-22
 
-  Documentation fixes
+  - Add IRC::Toolkit::ISupport
 
-0.071000  (10 Feb 2013)
+0.071001 2013-02-21
 
-  Add IRC::Toolkit::TS6 ID generator
+  - Fix 'use IRC::Toolkit qw/ ... /' imports
 
-0.070003  (09 Feb 2013)
+  - Documentation fixes
 
-  Missing dependency on namespace::clean
-   (drop it from Mode::Set)
+0.071000 2013-02-10
 
-0.070002  (09 Feb 2013)
+  - Add IRC::Toolkit::TS6 ID generator
 
-  Documentation updates
+0.070003 2013-02-09
 
-0.070001  (09 Feb 2013)
+  - Missing dependency on namespace::clean
 
-  Add IRC::Mode::Single, IRC::Mode::Set objects
-   (extracted from IRC::Server::Pluggable)
+0.070002 2013-02-09
 
+  - Documentation updates
 
-0.06    (01 Feb 2013)
-  t/;
-    Fix bad test (wrt 5.17 hash ordering changes)
-    Explicitly require Test::More 0.88
+0.070001 2013-02-09
 
-0.05    (28 Jan 2013)
-  IRC::Toolkit::Modes;
-    Kill use of '...'
+  - Add IRC::Mode::Single, IRC::Mode::Set objects
+    (extracted from IRC::Server::Pluggable)
 
-0.04    (28 Jan 2013)
-  IRC::Message::Object; 
-    Kill attrib writers (unneeded and bad practice)
-  IRC::Toolkit::Parser;
+0.06 2013-02-01
+
+  - Fix bad test (wrt 5.17 hash ordering changes)
+
+  - Explicitly require Test::More 0.88
+
+0.05 2013-01-28
+
+  - IRC::Toolkit::Modes; Kill use of '...'
+
+0.04 2013-01-28
+
+  - IRC::Message::Object; kill attribute writers
+  
+  - IRC::Toolkit::Parser;
     irc_line_from_ref also accepts IRC::Message::Object instances
 
-0.03    (27 Jan 2013)
-  POD tweaks
-  Move dist to dzil
-  Update copyright notices
+0.03 2013-01-27
 
-0.02    (27 Jan 2013)
-  POD/test tweaks
-  Fix repo metadata
+  - POD tweaks
+  
+  - Move dist to dzil
 
-0.01    (27 Jan 2013)
-  Initial release
+0.02 2013-01-27
+
+  - POD/test tweaks
+
+  - Fix repo metadata
+
+0.01 2013-01-27
+
+  - Initial release

@@ -1,6 +1,6 @@
 package IRC::Toolkit::Numerics;
 {
-  $IRC::Toolkit::Numerics::VERSION = '0.084000';
+  $IRC::Toolkit::Numerics::VERSION = '0.084001';
 }
 use strictures 1;
 use Carp 'confess';
@@ -322,7 +322,7 @@ our %Numeric = (
 
    '720' => 'RPL_OMOTDSTART',        # hybrid
    '721' => 'RPL_OMOTD',             # hybrid
-   '722' => 'RPL_ENDOFOMOTD',         # hybrid
+   '722' => 'RPL_ENDOFOMOTD',        # hybrid
    '723' => 'ERR_NOPRIVS',           # hybrid
    '724' => 'RPL_TESTMASK',          # hybrid
    '725' => 'RPL_TESTLINE',          # hybrid
