@@ -1,6 +1,6 @@
 package IRC::Toolkit::Numerics;
 {
-  $IRC::Toolkit::Numerics::VERSION = '0.084001';
+  $IRC::Toolkit::Numerics::VERSION = '0.084002';
 }
 use strictures 1;
 use Carp 'confess';

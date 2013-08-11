@@ -39,7 +39,7 @@
             "Storable" : "0",
             "namespace::clean" : "0",
             "overload" : "0",
-            "perl" : "v5.10.1",
+            "perl" : "v5.8.9",
             "strictures" : "1"
          }
       },
@@ -58,6 +58,6 @@
          "web" : "https://github.com/avenj/irc-toolkit"
       }
    },
-   "version" : "0.084001"
+   "version" : "0.084002"
 }
 

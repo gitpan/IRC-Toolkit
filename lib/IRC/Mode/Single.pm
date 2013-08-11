@@ -1,6 +1,6 @@
 package IRC::Mode::Single;
 {
-  $IRC::Mode::Single::VERSION = '0.084001';
+  $IRC::Mode::Single::VERSION = '0.084002';
 }
 
 use strictures 1;

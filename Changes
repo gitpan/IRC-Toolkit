@@ -1,5 +1,9 @@
 # Changes for IRC::Toolkit
 
+0.084002 2013-08-11
+
+  - perl-5.8.9 compatible release
+
 0.084001 2013-08-10
 
   - Minor cleanups & optimizations

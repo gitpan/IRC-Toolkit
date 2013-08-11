@@ -1,8 +1,7 @@
 package IRC::Toolkit::ISupport;
 {
-  $IRC::Toolkit::ISupport::VERSION = '0.084001';
+  $IRC::Toolkit::ISupport::VERSION = '0.084002';
 }
-use 5.10.1;
 use Carp 'confess';
 use strictures 1;
 
@@ -17,7 +16,7 @@ our @EXPORT = 'parse_isupport';
 
 my $parse_simple_flags = sub {
   my ($val) = @_;
-  +{ map {; $_ => 1 } split '', ( $val // '' ) }
+  +{ map {; $_ => 1 } split '', ( defined $val ? $val : '' ) }
 };
 
 my $parse = +{
@@ -39,10 +38,10 @@ my $parse = +{
     my ($val) = @_;
     my ($list, $always, $whenset, $bool) = split /,/, $val;
     +{
-      list    => array( split '', ( $list    // '' ) ),
-      always  => array( split '', ( $always  // '' ) ),
-      whenset => array( split '', ( $whenset // '' ) ),
-      bool    => array( split '', ( $bool    // '' ) ),
+      list    => array( split '', ( defined $list    ? $list    : ''  ) ),
+      always  => array( split '', ( defined $always  ? $always  : ''  ) ),
+      whenset => array( split '', ( defined $whenset ? $whenset : ''  ) ),
+      bool    => array( split '', ( defined $bool    ? $bool    : ''  ) ),
     }
   },
 
@@ -55,7 +54,7 @@ my $parse = +{
     my ($prefix, $flags) = split /,/, $val;
     +{ 
       prefix => $prefix, 
-      flags  => array( split '', ( $flags // '' ) ),
+      flags  => array( split '', ( defined $flags ? $flags : '' ) ),
     }
   },
 
@@ -115,7 +114,7 @@ sub _isupport_hash {
   ## Last is 'are supported by ...'
   my %split = map {;
     my ($key, $val) = split /=/, $_, 2;
-    ( lc($key), ($val // '0 but true') )
+    ( lc($key), (defined $val ? $val : '0 but true') )
   } @{ $obj->params }[1 .. ($#{ $obj->params } - 1) ];
 
   unless (keys %split) {
@@ -225,7 +224,7 @@ sub parse_isupport {
     / ) {
       *{ __PACKAGE__ .'::'. $acc } = sub {
           my ($ins, $val) = @_;
-          return ($ins->{$acc} // {}) unless defined $val;
+          return ($ins->{$acc} || +{}) unless defined $val;
           $ins->{$acc}->{$val}
       };
     }
