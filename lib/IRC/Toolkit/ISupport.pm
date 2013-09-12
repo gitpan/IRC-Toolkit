@@ -1,6 +1,6 @@
 package IRC::Toolkit::ISupport;
 {
-  $IRC::Toolkit::ISupport::VERSION = '0.084002';
+  $IRC::Toolkit::ISupport::VERSION = '0.085000';
 }
 use Carp 'confess';
 use strictures 1;
@@ -11,7 +11,7 @@ use IRC::Message::Object 'ircmsg';
 
 use List::Objects::WithUtils;
 
-use Exporter 'import';
+use parent 'Exporter::Tiny';
 our @EXPORT = 'parse_isupport';
 
 my $parse_simple_flags = sub {

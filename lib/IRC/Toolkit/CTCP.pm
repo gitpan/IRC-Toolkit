@@ -1,12 +1,12 @@
 package IRC::Toolkit::CTCP;
 {
-  $IRC::Toolkit::CTCP::VERSION = '0.084002';
+  $IRC::Toolkit::CTCP::VERSION = '0.085000';
 }
 
 use strictures 1;
 use Carp 'confess';
 
-use Exporter 'import';
+use parent 'Exporter::Tiny';
 our @EXPORT = qw/
   ctcp_quote
   ctcp_unquote

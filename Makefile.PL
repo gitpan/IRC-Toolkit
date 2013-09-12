@@ -21,7 +21,8 @@ my %WriteMakefileArgs = (
   "NAME" => "IRC::Toolkit",
   "PREREQ_PM" => {
     "Carp" => 0,
-    "Exporter" => 0,
+    "Exporter::Tiny" => 0,
+    "List::Objects::Types" => "0.002",
     "List::Objects::WithUtils" => "1.009",
     "Moo" => 1,
     "POE::Filter::IRCv3" => "0.045",
@@ -36,7 +37,7 @@ my %WriteMakefileArgs = (
     "Test::Exception" => 0,
     "Test::More" => "0.88"
   },
-  "VERSION" => "0.084002",
+  "VERSION" => "0.085000",
   "test" => {
     "TESTS" => "t/*.t t/02_util/*.t t/05_role/*.t"
   }

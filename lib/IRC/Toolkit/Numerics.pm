@@ -1,6 +1,6 @@
 package IRC::Toolkit::Numerics;
 {
-  $IRC::Toolkit::Numerics::VERSION = '0.084002';
+  $IRC::Toolkit::Numerics::VERSION = '0.085000';
 }
 use strictures 1;
 use Carp 'confess';
@@ -8,7 +8,7 @@ use List::Objects::WithUtils 'hash';
 
 use Module::Runtime 'use_module';
 
-use Exporter 'import';
+use parent 'Exporter::Tiny';
 our @EXPORT = qw/
   name_from_numeric
   numeric_from_name

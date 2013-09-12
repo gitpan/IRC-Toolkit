@@ -11,8 +11,9 @@ use List::Util qw/max/;
 
 my @modules = qw(
   Carp
-  Exporter
+  Exporter::Tiny
   ExtUtils::MakeMaker
+  List::Objects::Types
   List::Objects::WithUtils
   Moo
   POE::Filter::IRCv3

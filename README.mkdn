@@ -24,6 +24,9 @@ IRC::Toolkit - Useful IRC objects and utilities
 A collection of useful IRC-related utilities. See their respective
 documentation, below.
 
+Modules that export functions use [Exporter::Tiny](http://search.cpan.org/perldoc?Exporter::Tiny), which is quite flexible;
+see the [Exporter::Tiny](http://search.cpan.org/perldoc?Exporter::Tiny) docs for details.
+
 [IRC::Message::Object](http://search.cpan.org/perldoc?IRC::Message::Object); objects representing incoming or outgoing IRC events
 
 [IRC::Mode::Single](http://search.cpan.org/perldoc?IRC::Mode::Single); objects representing a single mode change

@@ -1,13 +1,13 @@
 package IRC::Toolkit::Role::CaseMap;
 {
-  $IRC::Toolkit::Role::CaseMap::VERSION = '0.084002';
+  $IRC::Toolkit::Role::CaseMap::VERSION = '0.085000';
 }
 use strictures 1;
 use Carp;
 
-use Role::Tiny;
-
 use IRC::Toolkit::Case;
+
+use Role::Tiny;
 
 use namespace::clean;
 
@@ -15,25 +15,22 @@ requires 'casemap';
 
 sub lower {
   my ($self, $val) = @_;
-  confess "lower() called without a value"
-    unless defined $val;
+  confess "lower() called without a value" unless defined $val;
   lc_irc( $val, $self->casemap )
 }
 
 sub upper {
   my ($self, $val) = @_;
-  confess "upper() called without a value"
-    unless defined $val;
+  confess "upper() called without a value" unless defined $val;
   uc_irc( $val, $self->casemap )
 }
 
 sub equal {
+  confess 'equal() expects two values'
+    unless @_ == 3;
   my ($self, $one, $two) = @_;
-  confess "equal() expects two values"
-    unless defined $one and defined $two;
   my $cmap = $self->casemap;
-  return 1 if uc_irc($one, $cmap) eq uc_irc($two, $cmap);
-  return
+  uc_irc($one, $cmap) eq uc_irc($two, $cmap) ? 1 : ()
 }
 
 1;

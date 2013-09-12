@@ -1,4 +1,12 @@
-# Changes for IRC::Toolkit
+Revision history for Perl module IRC::Toolkit
+
+0.085000 2013-09-12
+
+  - Switch to Exporter::Tiny
+
+  - Warn on unknown casemaps in lc/uc/eq
+
+  - Minor cleanups & optimizations
 
 0.084002 2013-08-11
 

@@ -21,6 +21,9 @@ DESCRIPTION
     A collection of useful IRC-related utilities. See their respective
     documentation, below.
 
+    Modules that export functions use Exporter::Tiny, which is quite
+    flexible; see the Exporter::Tiny docs for details.
+
     IRC::Message::Object; objects representing incoming or outgoing IRC
     events
 

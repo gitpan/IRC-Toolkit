@@ -1,12 +1,12 @@
 package IRC::Toolkit::Modes;
 {
-  $IRC::Toolkit::Modes::VERSION = '0.084002';
+  $IRC::Toolkit::Modes::VERSION = '0.085000';
 }
 
 use Carp;
 use strictures 1;
 
-use Exporter 'import';
+use parent 'Exporter::Tiny';
 our @EXPORT = qw/
   array_to_mode
   mode_to_array

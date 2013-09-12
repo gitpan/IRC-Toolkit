@@ -1,12 +1,12 @@
 package IRC::Toolkit::Parser;
 {
-  $IRC::Toolkit::Parser::VERSION = '0.084002';
+  $IRC::Toolkit::Parser::VERSION = '0.085000';
 }
 
 use Carp;
 use strictures 1;
 
-use Exporter 'import';
+use parent 'Exporter::Tiny';
 our @EXPORT = qw/
   irc_ref_from_line
   irc_line_from_ref

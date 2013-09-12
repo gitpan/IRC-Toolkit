@@ -1,12 +1,12 @@
 package IRC::Toolkit::Masks;
 {
-  $IRC::Toolkit::Masks::VERSION = '0.084002';
+  $IRC::Toolkit::Masks::VERSION = '0.085000';
 }
 
 use Carp;
 use strictures 1;
 
-use Exporter 'import';
+use parent 'Exporter::Tiny';
 our @EXPORT = qw/
   matches_mask
   normalize_mask
