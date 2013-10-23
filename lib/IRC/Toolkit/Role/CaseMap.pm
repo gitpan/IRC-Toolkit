@@ -1,6 +1,6 @@
 package IRC::Toolkit::Role::CaseMap;
 {
-  $IRC::Toolkit::Role::CaseMap::VERSION = '0.085000';
+  $IRC::Toolkit::Role::CaseMap::VERSION = '0.086000';
 }
 use strictures 1;
 use Carp;

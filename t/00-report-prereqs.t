@@ -16,12 +16,14 @@ my @modules = qw(
   List::Objects::Types
   List::Objects::WithUtils
   Moo
+  MooX::late
   POE::Filter::IRCv3
   Role::Tiny
   Scalar::Util
   Storable
   Test::Exception
   Test::More
+  Types::Standard
   namespace::clean
   overload
   perl

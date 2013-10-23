@@ -1,5 +1,10 @@
 Revision history for Perl module IRC::Toolkit
 
+0.086000 2013-10-23
+
+  - Use List::Objects::WithUtils list objects for IRC::Message::object
+    attributes
+
 0.085000 2013-09-12
 
   - Switch to Exporter::Tiny

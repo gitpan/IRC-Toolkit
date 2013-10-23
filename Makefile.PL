@@ -25,10 +25,12 @@ my %WriteMakefileArgs = (
     "List::Objects::Types" => "0.002",
     "List::Objects::WithUtils" => "1.009",
     "Moo" => 1,
+    "MooX::late" => "0.014",
     "POE::Filter::IRCv3" => "0.045",
     "Role::Tiny" => 0,
     "Scalar::Util" => 0,
     "Storable" => 0,
+    "Types::Standard" => 0,
     "namespace::clean" => 0,
     "overload" => 0,
     "strictures" => 1
@@ -37,7 +39,7 @@ my %WriteMakefileArgs = (
     "Test::Exception" => 0,
     "Test::More" => "0.88"
   },
-  "VERSION" => "0.085000",
+  "VERSION" => "0.086000",
   "test" => {
     "TESTS" => "t/*.t t/02_util/*.t t/05_role/*.t"
   }

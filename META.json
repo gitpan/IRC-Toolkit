@@ -4,7 +4,7 @@
       "Jon Portnoy <avenj@cobaltirc.org>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300037, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Dist::Zilla version 4.300039, CPAN::Meta::Converter version 2.120921",
    "license" : [
       "perl_5"
    ],
@@ -34,10 +34,12 @@
             "List::Objects::Types" : "0.002",
             "List::Objects::WithUtils" : "1.009",
             "Moo" : "1",
+            "MooX::late" : "0.014",
             "POE::Filter::IRCv3" : "0.045",
             "Role::Tiny" : "0",
             "Scalar::Util" : "0",
             "Storable" : "0",
+            "Types::Standard" : "0",
             "namespace::clean" : "0",
             "overload" : "0",
             "perl" : "v5.8.9",
@@ -59,6 +61,6 @@
          "web" : "https://github.com/avenj/irc-toolkit"
       }
    },
-   "version" : "0.085000"
+   "version" : "0.086000"
 }
 
