@@ -1,6 +1,6 @@
 package IRC::Message::Object;
 {
-  $IRC::Message::Object::VERSION = '0.086000';
+  $IRC::Message::Object::VERSION = '0.087000';
 }
 use strictures 1;
 use Carp;

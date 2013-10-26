@@ -25,6 +25,7 @@ requires:
   Role::Tiny: 0
   Scalar::Util: 0
   Storable: 0
+  Sub::Infix: 0
   Types::Standard: 0
   namespace::clean: 0
   overload: 0
@@ -32,4 +33,4 @@ requires:
   strictures: 1
 resources:
   repository: git://github.com/avenj/irc-toolkit.git
-version: 0.086000
+version: 0.087000

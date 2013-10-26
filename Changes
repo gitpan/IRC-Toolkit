@@ -1,8 +1,15 @@
 Revision history for Perl module IRC::Toolkit
 
+0.087000 2013-10-26
+
+  - IRC::Toolkit::Case;
+    Add |rfc1459| infix comparison operator
+    Add overloaded IRC::Toolkit::Case::MappedString objects
+    (and an 'irc_str()' function to construct them)
+
 0.086000 2013-10-23
 
-  - Use List::Objects::WithUtils list objects for IRC::Message::object
+  - Use List::Objects::WithUtils list objects for IRC::Message::Object
     attributes
 
 0.085000 2013-09-12

@@ -13,6 +13,7 @@ lib/IRC/Mode/Single.pm
 lib/IRC/Toolkit.pm
 lib/IRC/Toolkit/CTCP.pm
 lib/IRC/Toolkit/Case.pm
+lib/IRC/Toolkit/Case/MappedString.pm
 lib/IRC/Toolkit/Colors.pm
 lib/IRC/Toolkit/ISupport.pm
 lib/IRC/Toolkit/Masks.pm

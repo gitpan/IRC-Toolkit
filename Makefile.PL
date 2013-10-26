@@ -30,6 +30,7 @@ my %WriteMakefileArgs = (
     "Role::Tiny" => 0,
     "Scalar::Util" => 0,
     "Storable" => 0,
+    "Sub::Infix" => 0,
     "Types::Standard" => 0,
     "namespace::clean" => 0,
     "overload" => 0,
@@ -39,7 +40,7 @@ my %WriteMakefileArgs = (
     "Test::Exception" => 0,
     "Test::More" => "0.88"
   },
-  "VERSION" => "0.086000",
+  "VERSION" => "0.087000",
   "test" => {
     "TESTS" => "t/*.t t/02_util/*.t t/05_role/*.t"
   }

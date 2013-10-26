@@ -21,6 +21,7 @@ my @modules = qw(
   Role::Tiny
   Scalar::Util
   Storable
+  Sub::Infix
   Test::Exception
   Test::More
   Types::Standard
