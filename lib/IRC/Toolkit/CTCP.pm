@@ -1,6 +1,6 @@
 package IRC::Toolkit::CTCP;
 {
-  $IRC::Toolkit::CTCP::VERSION = '0.087000';
+  $IRC::Toolkit::CTCP::VERSION = '0.088001';
 }
 
 use strictures 1;
@@ -48,7 +48,7 @@ sub ctcp_unquote {
     $line =~ s/\cP([nr0\cP])/$dequote{$1}/g;
   }
 
-  substr($line, rindex($line, "\001"), 1, '\\a')
+  substr $line, rindex($line, "\001"), 1, '\\a' 
     if ($line =~ tr/\001//) % 2 != 0;
   return unless $line =~ tr/\001//;
 
@@ -196,7 +196,7 @@ Jon Portnoy <avenj@cobaltirc.org>
 Code derived from L<Net::IRC> and L<POE::Filter::IRC::Compat>, 
 copyright BinGOs, HINRIK, fimm, Abigail et al
 
-Licensed under the same terms as L<POE::Filter::IRC::Compat> and Perl itself.
+Licensed under the same terms as Perl.
 
 =cut
 

@@ -6,7 +6,7 @@ SYNOPSIS
       ##  (Case, Colors, CTCP, ISupport, Masks, Modes, Parser)
       use IRC::Toolkit;
 
-      ## Import specific modules:
+      ## Import a list of modules:
       use IRC::Toolkit qw/
         CTCP
         Masks
@@ -24,16 +24,16 @@ DESCRIPTION
     Modules that export functions use Exporter::Tiny, which is quite
     flexible; see the Exporter::Tiny docs for details.
 
-    IRC::Message::Object; objects representing incoming or outgoing IRC
+    IRC::Message::Object; Objects representing incoming or outgoing IRC
     events
 
-    IRC::Mode::Single; objects representing a single mode change
+    IRC::Mode::Single; Objects representing a single mode change
 
-    IRC::Mode::Set; objects representing a set of mode changes
+    IRC::Mode::Set; Objects representing a set of mode changes
 
     IRC::Toolkit::Case; RFC-compliant case folding tools
 
-    IRC::Toolkit::Colors; Color/format interpolation in strings
+    IRC::Toolkit::Colors; Color/format code interpolation & removal
 
     IRC::Toolkit::CTCP; CTCP quoting and extraction tools
 
@@ -48,7 +48,7 @@ DESCRIPTION
 
     IRC::Toolkit::Parser; Functional interface to POE::Filter::IRCv3
 
-    IRC::Toolkit::TS6; Produce TS6 IDs
+    IRC::Toolkit::TS6; Produce sequential TS6 IDs
 
     IRC::Toolkit::Role::CaseMap; A Role for classes that track IRC
     casemapping settings

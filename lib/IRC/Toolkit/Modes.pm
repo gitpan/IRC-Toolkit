@@ -1,10 +1,11 @@
 package IRC::Toolkit::Modes;
 {
-  $IRC::Toolkit::Modes::VERSION = '0.087000';
+  $IRC::Toolkit::Modes::VERSION = '0.088001';
 }
-
-use Carp;
 use strictures 1;
+use Carp;
+
+use Scalar::Util 'blessed', 'reftype';
 
 use parent 'Exporter::Tiny';
 our @EXPORT = qw/
@@ -16,8 +17,11 @@ our @EXPORT = qw/
 
 sub array_to_mode {
   my ($array) = @_;
+  if (blessed $array && $array->isa('IRC::Mode::Set')) {
+    $array = $array->mode_array
+  }
   confess "Expected an ARRAY but got $array" 
-    unless ref $array eq 'ARRAY';
+    unless reftype $array eq 'ARRAY';
   my @items = @$array;
 
   my $mstr;
@@ -54,6 +58,13 @@ sub mode_to_array {
     unless defined $modestr;
 
   my %args = @_;
+  if (my $isup = $args{isupport_chanmodes}) {
+    confess 
+    "isupport_chanmodes specified but not an ISupport chanmodes() obj: $isup"
+      unless blessed $isup and $isup->can('always') and $isup->can('whenset');
+    $args{param_always} = $isup->always->unbless;
+    $args{param_set}    = $isup->whenset->unbless;
+  }
   $args{param_always} ||= [ split //, 'bkohv' ];
   $args{param_set}    ||= ( $args{param_on_set} || [ 'l' ] );
   $args{params}       ||= [ ];
@@ -66,7 +77,7 @@ sub mode_to_array {
 
   for (qw/ param_always param_set params /) {
     confess "$_ should be an ARRAY"
-      unless ref $args{$_} eq 'ARRAY';
+      unless reftype $args{$_} eq 'ARRAY';
   }
 
   my @parsed;
@@ -184,8 +195,25 @@ For example:
     [ '-', 't' ],
   ],
 
-(If the mode string contains (space-delimited) parameters, they are given
-precedence ahead of the optional 'params' ARRAY.)
+If the mode string contains (space-delimited) parameters, they are given
+precedence ahead of the optional 'params' ARRAY.
+
+Instead of manually specifying C<param_always> and C<param_set>, you can pass
+in the B<chanmodes> object provided by L<IRC::Toolkit::ISupport>:
+
+  my $isupport = parse_isupport(@isupport_lines);
+  my $array = mode_to_array( '+kl-t',
+    params => [ 'key', 10 ],
+    isupport_chanmodes => $isupport->chanmodes,
+  );
+
+C<isupport_chanmodes> will override C<param_always> / C<param_set> -- if
+that's not acceptable, you can select individual sets:
+
+  my $array = mode_to_array( '+klX-t',
+    params => [ 'key', 10, 'foo' ],
+    param_always => $isupport->chanmodes->always,
+    param_set    => [ 'lX' ],
 
 =head2 array_to_mode
 

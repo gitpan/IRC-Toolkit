@@ -1,6 +1,6 @@
 package IRC::Toolkit::ISupport;
 {
-  $IRC::Toolkit::ISupport::VERSION = '0.087000';
+  $IRC::Toolkit::ISupport::VERSION = '0.088001';
 }
 use Carp 'confess';
 use strictures 1;
@@ -259,6 +259,7 @@ sub parse_isupport {
   }
 
   ## Everything else is bool / int / str we can't parse
+  ##  FIXME override can() ?
   our $AUTOLOAD;
   sub AUTOLOAD {
     my ($self) = @_;

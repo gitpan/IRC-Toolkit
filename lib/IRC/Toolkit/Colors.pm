@@ -1,13 +1,16 @@
 package IRC::Toolkit::Colors;
 {
-  $IRC::Toolkit::Colors::VERSION = '0.087000';
+  $IRC::Toolkit::Colors::VERSION = '0.088001';
 }
-
-use Carp;
 use strictures 1;
+use Carp;
 
 use parent 'Exporter::Tiny';
-our @EXPORT = 'color';
+our @EXPORT = qw/
+  color
+  has_color
+  strip_color
+/;
 
 our %COLORS = (
   NORMAL      => "\x0f",
@@ -47,9 +50,30 @@ sub color {
     carp "Invalid format $fmt passed to color()";
     return $str || $COLORS{NORMAL}
   }
-  return $slct . $str . $COLORS{NORMAL} if $str;
-  return $slct
+  $str ? join('', $slct, $str, $COLORS{NORMAL}) : $slct
 }
+
+sub has_color {
+  my ($str) = @_;
+  $str =~ /[\x02\x03\x04\x1B\x1f\x16\x1d\x11\x06]/ ? 1 : ()
+}
+
+sub strip_color {
+  my ($str) = @_;
+  # Borrowed from IRC::Utils;
+  # mIRC:
+  $str =~ s/\x03(?:,\d{1,2}|\d{1,2}(?:,\d{1,2})?)?//g;
+  # RGB:
+  $str =~ s/\x04[0-9a-fA-F]{0,6}//ig;
+  # ECMA-48:
+  $str =~ s/\x1B\[.*?[\x00-\x1F\x40-\x7E]//g;
+  # Formatting codes:
+  $str =~ s/[\x02\x1f\x16\x1d\x11\x06]//g;
+  # Cancellation code:
+  $str =~ s/\x0f//g;
+  $str
+}
+
 
 1;
 
@@ -62,6 +86,12 @@ IRC::Toolkit::Colors - IRC color code utilities
 =head1 SYNOPSIS
 
   my $str = color('red', "red text") ." other text";
+
+  if (has_color($str)) {
+    # ...
+  }
+
+  my $stripped = strip_color($str);
 
 =head1 DESCRIPTION
 
@@ -102,8 +132,21 @@ Valid color codes are:
   gray
   light_gray
 
+=head2 has_color
+
+Returns true if the given string contains color or formatting codes.
+
+=head2 strip_color
+
+Strips all color and formatting codes from the string.
+
 =head1 AUTHOR
 
 Jon Portnoy <avenj@cobaltirc.org>
+
+Much of this code is primarily derived from L<IRC::Utils>, authored by HINRIK &
+BINGOS.
+
+Licensed under the same terms as Perl.
 
 =cut

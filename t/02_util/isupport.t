@@ -6,7 +6,7 @@ BEGIN { use_ok( 'IRC::Toolkit::ISupport' ) }
 ### Feeding raw lines
 my @lines = (
    ':eris.oppresses.us 005 meh CHANLIMIT=#&:25 CHANNELLEN=50 ' .
-   'CHANMODES=eIqdb,k,l,cimnpstCMRS AWAYLEN=160 KNOCK ELIST=CTU SAFELIST ' .
+   'CHANMODES=eIqdb,kX,l,cimnpstCMRS AWAYLEN=160 KNOCK ELIST=CTU SAFELIST ' .
    'EXCEPTS=e INVEX=I EXTBAN=$,gnp :are supported by this server',
 
    ':eris.oppresses.us 005 meh CALLERID CASEMAPPING=rfc1459 DEAF=D ' .
@@ -47,7 +47,7 @@ ok( !$isup->chanlimit('+'), 'chanlimit ne compare' );
 is_deeply( $isup->chanmodes,
   {
     list    => [ split '', 'eIqdb' ],
-    always  => [ 'k' ],
+    always  => [ split '', 'kX' ],
     whenset => [ 'l' ],
     bool    => [ split '', 'cimnpstCMRS' ],
   },
@@ -59,7 +59,7 @@ is_deeply( $isup->chanmodes->list,
   'chanmodes->list() ok'
 );
 is_deeply( $isup->chanmodes->always,
-  [ 'k' ],
+  [ 'k', 'X' ],
   'chanmodes->always() ok'
 );
 is_deeply( $isup->chanmodes->whenset,
@@ -71,9 +71,25 @@ is_deeply( $isup->chanmodes->bool,
   'chanmodes->bool() ok'
 );
 cmp_ok( $isup->chanmodes->as_string, 'eq',
-  'eIqdb,k,l,cimnpstCMRS',
+  'eIqdb,kX,l,cimnpstCMRS',
   'chanmodes->as_string() ok'
 );
+
+use IRC::Toolkit::Modes 'mode_to_array';
+is_deeply( 
+  mode_to_array( '+klX-t',
+    params => [ 'key', 10, 'foo' ],
+    isupport_chanmodes => $isup->chanmodes
+  ),
+  [
+    [ '+', 'k', 'key' ],
+    [ '+', 'l', 10    ],
+    [ '+', 'X', 'foo' ],
+    [ '-', 't' ],
+  ],
+  'mode_to_array with isupport->chanmodes ok'
+);
+
 
 # chantypes()
 is_deeply( $isup->chantypes,

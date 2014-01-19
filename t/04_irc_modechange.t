@@ -129,4 +129,8 @@ is_deeply( $funkyopts->params,
   'params() looks ok'
 );
 
+use IRC::Toolkit::Modes 'array_to_mode';
+cmp_ok array_to_mode($funkyopts), 'eq', '+z-o+mg things stuff',
+  'array_to_mode on IRC::Mode::Set ok';
+
 done_testing;

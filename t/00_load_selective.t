@@ -16,4 +16,12 @@ ok( !main->can($_), "did not import $_" ) for qw/
   irc_ref_to_line irc_line_to_ref
 /;
 
+{
+  my $warned;
+  local $SIG{__WARN__} = sub { $warned = 1 };
+  eval {; IRC::Toolkit->import(qw/Case Colors Foo/) };
+  like $@, qr/import/, 'bad import dies ok';
+  ok $warned, 'bad import warned ok';
+}
+
 done_testing;

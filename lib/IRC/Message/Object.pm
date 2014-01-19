@@ -1,6 +1,6 @@
 package IRC::Message::Object;
 {
-  $IRC::Message::Object::VERSION = '0.087000';
+  $IRC::Message::Object::VERSION = '0.088001';
 }
 use strictures 1;
 use Carp;
@@ -89,7 +89,7 @@ has tags => (
 
 =pod
 
-=for Pod::Coverage BUILDARGS
+=for Pod::Coverage BUILDARGS has_\w+
 
 =cut
 

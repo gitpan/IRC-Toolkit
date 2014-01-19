@@ -1,6 +1,6 @@
 package IRC::Toolkit::Numerics;
 {
-  $IRC::Toolkit::Numerics::VERSION = '0.087000';
+  $IRC::Toolkit::Numerics::VERSION = '0.088001';
 }
 use strictures 1;
 use Carp 'confess';
@@ -179,6 +179,7 @@ our %Numeric = (
    '375' => 'RPL_MOTDSTART',         # RFC1459
    '376' => 'RPL_ENDOFMOTD',         # RFC1459
    '378' => 'RPL_WHOISHOST',         # charybdis
+#   '379' => 'RPL_WHOISMODES',        # hybrid-8.1.12, conflicts with 310
 
    '381' => 'RPL_YOUREOPER',         # RFC1459
    '382' => 'RPL_REHASHING',         # RFC1459
@@ -328,6 +329,8 @@ our %Numeric = (
    '725' => 'RPL_TESTLINE',          # hybrid
    '726' => 'RPL_NOTESTLINE',        # hybrid
    '727' => 'RPL_TESTMASKGECOS',     # ratbox
+   '728' => 'RPL_QUIETLIST',         # charybdis
+   '729' => 'RPL_ENDOFQUIETLIST',    # charybdis
 
    '730' => 'RPL_MONONLINE',         # ircv3 monitor ext
    '731' => 'RPL_MONOFFLINE',        # ircv3 monitor ext

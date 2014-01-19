@@ -1,8 +1,7 @@
 package IRC::Mode::Set;
 {
-  $IRC::Mode::Set::VERSION = '0.087000';
+  $IRC::Mode::Set::VERSION = '0.088001';
 }
-
 use strictures 1;
 use Carp;
 
@@ -15,81 +14,70 @@ use Storable 'dclone';
 use Moo;
 
 my $str_to_arr = sub {
-  ref $_[0] eq 'ARRAY' ? $_[0]
-    : [ split //, $_[0] ]
+  ref $_[0] eq 'ARRAY' ? $_[0] : [ split //, $_[0] ]
 };
 
 has param_always => (
   lazy    => 1,
   is      => 'ro',
   coerce  => $str_to_arr,
-  default => sub {
-    [ split //, 'bkohv' ]
-  }
+  builder => sub { [ split //, 'bkohv' ] },
 );
 
 has param_on_set => (
   lazy    => 1,
   is      => 'ro',
   coerce  => $str_to_arr,
-  default => sub {
-    [ 'l' ]
-  }
+  builder => sub { [ 'l' ] },
 );
 
 has mode_array => (
   lazy      => 1,
   is        => 'ro',
   predicate => 'has_mode_array',
-  builder   => '_build_mode_array',
+  builder   => sub {
+    my ($self) = @_;
+    mode_to_array( $self->mode_string,
+      param_always => $self->param_always,
+      param_set    => $self->param_on_set,
+      (
+        $self->has_params ? (params => $self->params)
+         : ()
+      ),
+    );
+  },
 );
-
-sub _build_mode_array {
-  my ($self) = @_;
-  mode_to_array( $self->mode_string,
-    param_always => $self->param_always,
-    param_set    => $self->param_on_set,
-    (
-      $self->has_params ? (params => $self->params)
-       : ()
-    ),
-  );
-}
 
 has params => (
   lazy      => 1,
   is        => 'ro',
   predicate => 'has_params',
-  builder   => '_build_params',
   coerce    => sub {
-    ref $_[0] eq 'ARRAY' ? $_[0]
-      : [ split ' ', $_[0] ]
+    ref $_[0] eq 'ARRAY' ? $_[0] : [ split ' ', $_[0] ]
+  },
+  builder => sub {
+    my ($self) = @_;
+    my $arr;
+    for my $cset (@{ $self->mode_array }) {
+      push @$arr, $cset->[2]
+        if defined $cset->[2]
+    }
+    $arr
   },
 );
 
-sub _build_params {
-  my ($self) = @_;
-
-  my $arr;
-  for my $cset (@{ $self->mode_array }) {
-    push @$arr, $cset->[2]
-      if defined $cset->[2]
-  }
-  $arr
-}
 
 sub as_string { $_[0]->mode_string }
+
 has mode_string => (
   lazy      => 1,
   is        => 'ro',
   predicate => 'has_mode_string',
-  builder   => '_build_mode_string',
+  builder   => sub {
+    my ($self) = @_;
+    array_to_mode $self->mode_array
+  },
 );
-
-sub _build_mode_string {
-  my ($self) = @_;
-  array_to_mode( $self->mode_array )
-}
 
 
 sub split_mode_set {
@@ -135,20 +123,6 @@ sub clone_from_params {
   )
 }
 
-=pod
-
-=for Pod::Coverage new_from_(mode|params)
-
-=cut
-
-## FIXME deprecated, remove Soon
-sub new_from_mode {
-  confess "new_from_mode() is deprecated; use clone_from_mode"
-}
-sub new_from_params {
-  confess "new_from_params() is deprecated; use clone_from_params"
-}
-
 
 sub modes_as_objects {
   my ($self) = @_;
@@ -162,10 +136,11 @@ sub modes_as_objects {
   @new
 }
 
+
 has '_iter' => (
   lazy    => 1,
   is      => 'rw',
-  default => sub { 0 },
+  builder => sub { 0 },
 );
 
 sub next {
@@ -186,7 +161,7 @@ sub reset {
 
 =pod
 
-=for Pod::Coverage BUILD
+=for Pod::Coverage BUILD has_\w+
 
 =cut
 
@@ -320,6 +295,8 @@ This is a data structure in the form of:
 
 Also see L<IRC::Toolkit::Modes/mode_to_array>
 
+Predicate: B<has_mode_array>
+
 =head2 modes_as_objects
 
 Returns a list of L<IRC::Mode::Single> objects constructed from our current
@@ -329,6 +306,8 @@ L</mode_array>.
 
 Returns the string representing the mode change.
 
+Predicate: B<has_mode_string>
+
 =head2 as_string
 
 B<as_string> is an alias for B<mode_string> to retain compatibility with
@@ -337,6 +316,8 @@ L<IRC::Mode::Single>.
 =head2 params
 
 Retrieve only the parameters to the mode change (as an ARRAY)
+
+Predicate: B<has_params>
 
 =head2 next
 

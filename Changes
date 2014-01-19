@@ -1,5 +1,20 @@
 Revision history for Perl module IRC::Toolkit
 
+0.088001 2014-01-19
+
+  - IRC::Toolkit::Modes;
+    array_to_mode supports IRC::Mode::Set objects
+    mode_to_array accepts IRC::Toolkit::ISupport ->chanmodes objects
+
+  - IRC::Toolkit::Colors;
+    Add has_color / strip_color
+
+  - IRC::Toolkit::Numerics;
+    Add charybdis QUIETLIST numerics
+
+  - IRC::Mode::Set;
+    Remove deprecated new_from_* methods (went away in 0.08)
+
 0.087000 2013-10-26
 
   - IRC::Toolkit::Case;
