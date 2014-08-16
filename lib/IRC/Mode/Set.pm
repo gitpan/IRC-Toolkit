@@ -1,7 +1,5 @@
 package IRC::Mode::Set;
-{
-  $IRC::Mode::Set::VERSION = '0.088001';
-}
+$IRC::Mode::Set::VERSION = '0.088002';
 use strictures 1;
 use Carp;
 
@@ -81,7 +79,6 @@ has mode_string => (
 
 
 sub split_mode_set {
-  ## Split into smaller sets of changes.
   my ($self, $max) = @_;
   $max ||= 4;
 
@@ -137,7 +134,7 @@ sub modes_as_objects {
 }
 
 
-has '_iter' => (
+has _iter => (
   lazy    => 1,
   is      => 'rw',
   builder => sub { 0 },

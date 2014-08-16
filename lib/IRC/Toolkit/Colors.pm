@@ -1,7 +1,5 @@
 package IRC::Toolkit::Colors;
-{
-  $IRC::Toolkit::Colors::VERSION = '0.088001';
-}
+$IRC::Toolkit::Colors::VERSION = '0.088002';
 use strictures 1;
 use Carp;
 

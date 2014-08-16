@@ -1,7 +1,5 @@
 package IRC::Toolkit::ISupport;
-{
-  $IRC::Toolkit::ISupport::VERSION = '0.088001';
-}
+$IRC::Toolkit::ISupport::VERSION = '0.088002';
 use Carp 'confess';
 use strictures 1;
 
@@ -94,7 +92,7 @@ my $parse = +{
 
   targmax => sub {
     my ($val) = @_;
-    my $ref = {};
+    my $ref = +{};
     TARGTYPE: for my $chunk (split /,/, $val) {
       my ($type, $lim) = split /:/, $chunk, 2;
       next TARGTYPE unless defined $lim;
@@ -258,14 +256,29 @@ sub parse_isupport {
     $self->{extban}
   }
 
-  ## Everything else is bool / int / str we can't parse
-  ##  FIXME override can() ?
+  ## Everything else is bool / int / str we can't parse:
   our $AUTOLOAD;
   sub AUTOLOAD {
     my ($self) = @_;
-    my $subname = (split /::/, $AUTOLOAD)[-1];
-    $self->{$subname}
+    my $method = (split /::/, $AUTOLOAD)[-1];
+    $self->{$method}
   }
+
+  sub can {
+    my ($self, $method) = @_;
+    if (my $sub = $self->SUPER::can($method)) {
+      return $sub
+    }
+    return unless exists $self->{$method};
+    sub {
+      my ($this) = @_;
+      if (my $sub = $this->SUPER::can($method)) {
+        goto $sub
+      }
+      $AUTOLOAD = $method; goto &AUTOLOAD
+    }
+  }
+
   sub DESTROY {}
 
 }

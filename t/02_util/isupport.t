@@ -17,6 +17,13 @@ my @lines = (
 );
 
 my $isup = parse_isupport(@lines);
+
+## can()
+ok !$isup->can('nonexistant'), 'negative can() ok';
+my $cref = $isup->can('callerid');
+ok ref $cref eq 'CODE', 'can() returned coderef ok';
+ok $isup->$cref, 'can() coderef looks ok';
+
 ## Bool-type
 ok( $isup->callerid, 'callerid() ok' );
 ok( !$isup->nonexistant, 'nonexistant key is negative' );

@@ -1,7 +1,5 @@
 package IRC::Toolkit::Numerics;
-{
-  $IRC::Toolkit::Numerics::VERSION = '0.088001';
-}
+$IRC::Toolkit::Numerics::VERSION = '0.088002';
 use strictures 1;
 use Carp 'confess';
 use List::Objects::WithUtils 'hash';

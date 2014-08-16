@@ -1,5 +1,11 @@
 Revision history for Perl module IRC::Toolkit
 
+0.088002 2014-08-16
+
+  - Fix $isupport->can()
+
+  - Happy CPAN Day!
+
 0.088001 2014-01-19
 
   - IRC::Toolkit::Modes;

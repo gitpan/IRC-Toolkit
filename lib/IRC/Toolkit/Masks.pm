@@ -1,8 +1,5 @@
 package IRC::Toolkit::Masks;
-{
-  $IRC::Toolkit::Masks::VERSION = '0.088001';
-}
-
+$IRC::Toolkit::Masks::VERSION = '0.088002';
 use Carp;
 use strictures 1;
 

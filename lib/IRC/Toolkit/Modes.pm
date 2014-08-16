@@ -1,7 +1,5 @@
 package IRC::Toolkit::Modes;
-{
-  $IRC::Toolkit::Modes::VERSION = '0.088001';
-}
+$IRC::Toolkit::Modes::VERSION = '0.088002';
 use strictures 1;
 use Carp;
 

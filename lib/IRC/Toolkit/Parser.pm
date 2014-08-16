@@ -1,8 +1,5 @@
 package IRC::Toolkit::Parser;
-{
-  $IRC::Toolkit::Parser::VERSION = '0.088001';
-}
-
+$IRC::Toolkit::Parser::VERSION = '0.088002';
 use Carp;
 use strictures 1;
 

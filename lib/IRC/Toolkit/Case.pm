@@ -1,7 +1,5 @@
 package IRC::Toolkit::Case;
-{
-  $IRC::Toolkit::Case::VERSION = '0.088001';
-}
+$IRC::Toolkit::Case::VERSION = '0.088002';
 use strictures 1;
 no warnings 'once';
 use Carp 'carp';

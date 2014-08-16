@@ -1,7 +1,5 @@
 package IRC::Toolkit;
-{
-  $IRC::Toolkit::VERSION = '0.088001';
-}
+$IRC::Toolkit::VERSION = '0.088002';
 use strictures 1;
 use Carp;
 

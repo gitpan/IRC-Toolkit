@@ -9,7 +9,7 @@ BEGIN {
 use strict;
 use warnings;
 
-# this test was generated with Dist::Zilla::Plugin::NoTabsTests 0.05
+# this test was generated with Dist::Zilla::Plugin::Test::NoTabs 0.08
 
 use Test::More 0.88;
 use Test::NoTabs;
@@ -29,7 +29,30 @@ my @files = (
     'lib/IRC/Toolkit/Numerics.pm',
     'lib/IRC/Toolkit/Parser.pm',
     'lib/IRC/Toolkit/Role/CaseMap.pm',
-    'lib/IRC/Toolkit/TS6.pm'
+    'lib/IRC/Toolkit/TS6.pm',
+    't/00-report-prereqs.dd',
+    't/00-report-prereqs.t',
+    't/00_load.t',
+    't/00_load_selective.t',
+    't/01_message_obj.t',
+    't/02_util/case.t',
+    't/02_util/colors.t',
+    't/02_util/ctcp.t',
+    't/02_util/isupport.t',
+    't/02_util/mask.t',
+    't/02_util/modes.t',
+    't/02_util/numerics.t',
+    't/02_util/parser.t',
+    't/02_util/ts6.t',
+    't/03_irc_mode.t',
+    't/04_irc_modechange.t',
+    't/05_role/casemap.t',
+    't/release-cpan-changes.t',
+    't/release-no-tabs.t',
+    't/release-pod-coverage.t',
+    't/release-pod-linkcheck.t',
+    't/release-pod-syntax.t',
+    't/release-unused-vars.t'
 );
 
 notabs_ok($_) foreach @files;
