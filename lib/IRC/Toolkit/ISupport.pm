@@ -1,5 +1,5 @@
 package IRC::Toolkit::ISupport;
-$IRC::Toolkit::ISupport::VERSION = '0.088002';
+$IRC::Toolkit::ISupport::VERSION = '0.089001';
 use Carp 'confess';
 use strictures 1;
 

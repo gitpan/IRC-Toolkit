@@ -1,5 +1,5 @@
 package IRC::Mode::Single;
-$IRC::Mode::Single::VERSION = '0.088002';
+$IRC::Mode::Single::VERSION = '0.089001';
 use strictures 1;
 use Carp;
 

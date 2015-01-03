@@ -20,6 +20,14 @@ cmp_ok( $obj->command, 'eq', '001', 'command  ok' );
 cmp_ok( $obj->params->[0], 'eq', 'user', 'param 0  ok' );
 cmp_ok( $obj->params->[1], 'eq', 'Welcome to IRC', 'param 1  ok' );
 
+is_deeply $obj->TO_JSON,
+  +{
+    prefix  => 'server.org',
+    command => '001',
+    params  => [ 'user', 'Welcome to IRC' ],
+  },
+  'TO_JSON ok';
+
 my $short = ircmsg(%$hash);
 isa_ok($short, 'IRC::Message::Object', 'ircmsg() produced obj' );
 cmp_ok( $short->command, 'eq', '001', 'ircmsg()->command()  ok' );

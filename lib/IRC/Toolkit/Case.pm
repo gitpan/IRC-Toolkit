@@ -1,5 +1,5 @@
 package IRC::Toolkit::Case;
-$IRC::Toolkit::Case::VERSION = '0.088002';
+$IRC::Toolkit::Case::VERSION = '0.089001';
 use strictures 1;
 no warnings 'once';
 use Carp 'carp';
@@ -90,8 +90,13 @@ sub irc_str {
   IRC::Toolkit::Case::MappedString->new(@_)
 }
 
-
-1;
+print
+  qq[<Gilded> Also, every now and then I talk about a game I've enjoyed],
+  qq[ and rofer doesn't have time for it, Capn v1.02 doesn't understand],
+  qq[ the human concept of fun/entertainment, c[_] only plays retro-games],
+  qq[ made in his native homeland of Moria and avenj would rather shoot],
+  qq[ rifles while vaping\n]
+unless caller; 1;
 
 =pod
 

@@ -1,5 +1,5 @@
 package IRC::Message::Object;
-$IRC::Message::Object::VERSION = '0.088002';
+$IRC::Message::Object::VERSION = '0.089001';
 use strictures 1;
 use Carp;
 
@@ -9,11 +9,10 @@ use Types::Standard -all;
 
 use POE::Filter::IRCv3;
 
-use Moo;
-use MooX::late;
+use Moo; use MooX::late;
 
 extends 'Exporter::Tiny';
-our @EXPORT_OK = 'ircmsg';
+our @EXPORT = our @EXPORT_OK = 'ircmsg';
 
 use namespace::clean;
 
@@ -27,7 +26,6 @@ has colonify => (
 has command => (
   required  => 1,
   is        => 'ro',
-  predicate => 'has_command',
 );
 
 
@@ -87,7 +85,7 @@ has tags => (
 
 =pod
 
-=for Pod::Coverage BUILDARGS has_\w+
+=for Pod::Coverage BUILDARGS TO_JSON has_\w+
 
 =cut
 
@@ -180,6 +178,16 @@ sub truncate {
   (ref $self)->new(raw_line => $new)
 }
 
+sub TO_JSON {
+  my ($self) = @_;
+  +{
+    command => $self->command,
+    prefix  => $self->prefix,
+    params  => $self->params,
+    ( $self->has_tags ? (tags => $self->tags) : () ),
+  }
+}
+
 print
   qq[<rnowak> fine, be rude like that\n],
   qq[<Perihelion> SORRY I WAS DISCUSSING THE ABILITY TO],
@@ -259,8 +267,6 @@ Note that if the C<command> is set at construction time,
 no case-folding takes place.
 However, specifying a C<raw_line> at construction feeds 
 L<POE::Filter::IRCv3>, which will uppercase commands.
-
-predicate: C<has_command>
 
 =head3 params
 

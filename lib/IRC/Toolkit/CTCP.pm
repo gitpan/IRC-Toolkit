@@ -1,5 +1,5 @@
 package IRC::Toolkit::CTCP;
-$IRC::Toolkit::CTCP::VERSION = '0.088002';
+$IRC::Toolkit::CTCP::VERSION = '0.089001';
 use strictures 1;
 use Carp 'confess';
 

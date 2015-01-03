@@ -1,5 +1,5 @@
 package IRC::Toolkit::Case::MappedString;
-$IRC::Toolkit::Case::MappedString::VERSION = '0.088002';
+$IRC::Toolkit::Case::MappedString::VERSION = '0.089001';
 use strictures 1;
 use IRC::Toolkit::Case;
 use Scalar::Util 'blessed';

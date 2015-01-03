@@ -1,5 +1,5 @@
 package IRC::Toolkit::TS6;
-$IRC::Toolkit::TS6::VERSION = '0.088002';
+$IRC::Toolkit::TS6::VERSION = '0.089001';
 use strictures 1;
 use Carp;
 

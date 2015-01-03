@@ -1,5 +1,11 @@
 Revision history for Perl module IRC::Toolkit
 
+0.089001 2015-01-03
+
+  - IRC::Message::Object;
+    add TO_JSON method
+    drop unnecessary ->has_command predicate
+
 0.088002 2014-08-16
 
   - Fix $isupport->can()
